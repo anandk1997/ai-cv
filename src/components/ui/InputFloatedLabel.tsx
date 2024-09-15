@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { FocusEvent, useState } from "react";
 
 type FloatedLabelInput = {
@@ -8,6 +9,7 @@ type FloatedLabelInput = {
   placeholder?: string;
   name?: string;
   id?: string;
+  className?: string;
 };
 
 export const InputFloatedLabel: React.FC<FloatedLabelInput> = ({
@@ -16,6 +18,7 @@ export const InputFloatedLabel: React.FC<FloatedLabelInput> = ({
   placeholder,
   name,
   id,
+  className,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(false);
@@ -28,7 +31,7 @@ export const InputFloatedLabel: React.FC<FloatedLabelInput> = ({
   };
 
   return (
-    <div className="relative w-full">
+    <div className={cn("relative w-full", className)}>
       <input
         type={type ?? "text"}
         id={id}
