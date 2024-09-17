@@ -14,7 +14,7 @@ const SignIn = () => {
     <>
       <AuthHeader title="Sign in" />
 
-      <div className="flex gap-3 font-semibold mb-7 mt-2">
+      <div className="flex gap-3 font-medium mb-7 mt-2">
         <span>New user?</span>
 
         <Link href="/sign-up" className="text-blue-600">
