@@ -29,7 +29,7 @@ const SignIn = () => {
           Forgot password?
         </Link>
 
-        <Link href="/search-history">
+        <Link href="/transaction-history">
           <button className="rounded-lg bg-blue-600 text-white py-3 px-10">
             Send OTP
           </button>

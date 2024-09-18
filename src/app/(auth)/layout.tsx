@@ -1,6 +1,8 @@
 import React from "react";
 
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
+import Image from "next/image";
+import AICV from "@/images/ai-cv1.png";
 
 const AuthLayout = ({
   children,
@@ -8,8 +10,14 @@ const AuthLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="flex flex-col md:flex-row justify-between h-[100vh] w-[100%] bg-blue-100">
+    <div className="flex flex-col md:flex-row justify-between h-[100vh] w-[100%] bg-[hsl(212deg_100%_97.06%)]">
       <div className="flex flex-col justify-center items-center align-middle gap-12 content-center w-[50%]">
+        <div className="flex items-center gap-2 ps-7 py-3 text-[#005dff] font-bold text-2xl">
+          <Image src={AICV} height={65} width={65} alt="" />
+
+          <span className="">AI CV</span>
+        </div>
+
         <h1 className="font-semibold text-5xl">
           <div className="">One tool for your</div>
           <div className="">whole team needs</div>

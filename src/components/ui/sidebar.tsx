@@ -1,64 +1,156 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BsGrid } from "react-icons/bs";
+import { CiCircleInfo } from "react-icons/ci";
+import { GoGear, GoStack } from "react-icons/go";
+import { MdChatBubbleOutline } from "react-icons/md";
+import { PiSignOutThin } from "react-icons/pi";
+import AICV from "@/images/ai-cv.png";
 
 export const Sidebar = () => {
   const path = usePathname();
 
   const selected = (pathName: string) =>
     path === pathName && (
-      <span className="border-r-4 rounded-md border-blue-500" />
+      <span className="border-r-4 h-12 rounded-md border-blue-500" />
     );
 
+  const active = (pathName: string) =>
+    path === pathName ? "text-[#005dff] font-semibold" : "text-gray-400";
+
   return (
-    <div className="w-[20%] bg-white py-24">
-      <div className=""></div>
+    <div className="w-[15%] bg-white py-8 flex flex-col gap-3 h-full overflow-auto">
+      <div className="flex items-center gap-2 ps-7 py-3 text-[#005dff] font-bold text-2xl">
+        <Image src={AICV} height={55} width={55} alt="" />
 
-      <ul>
-        <li className="flex justify-between my-2">
-          <Link href={"/search"} className="w-full ps-8 py-3">
-            Search CV
-          </Link>
+        <span className="">AI CV</span>
+      </div>
 
-          {selected("/search")}
-        </li>
+      <div className="flex flex-col justify-between h-full">
+        <div className="">
+          <ul>
+            <li className="flex justify-between items-center my-2">
+              <Link
+                href={"/search"}
+                className={cn(
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  active("/search"),
+                )}
+              >
+                <BsGrid size={23} />
 
-        <li className="flex justify-between my-2">
-          <Link href={"/shortlisted"} className="w-full block ps-8 py-5">
-            Shortlisted CV
-          </Link>
+                <span>Search CV</span>
+              </Link>
 
-          {selected("/shortlisted")}
-        </li>
+              {selected("/search")}
+            </li>
 
-        <li className="flex justify-between my-2">
-          <Link
-            href={"/transaction-history"}
-            className="w-full block ps-8 py-5"
-          >
-            Transaction History
-          </Link>
+            <li className="flex justify-between items-center my-2">
+              <Link
+                href={"/shortlisted"}
+                className={cn(
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  active("/shortlisted"),
+                )}
+              >
+                <GoStack size={23} />
 
-          {selected("/transaction-history")}
-        </li>
+                <span>Shortlisted CV</span>
+              </Link>
 
-        <li className="flex justify-between my-2">
-          <Link href={"/search-history"} className="w-full block ps-8 py-5">
-            Search History
-          </Link>
+              {selected("/shortlisted")}
+            </li>
 
-          {selected("/search-history")}
-        </li>
+            <li className="flex justify-between items-center my-2">
+              <Link
+                href={"/transaction-history"}
+                className={cn(
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  active("/transaction-history"),
+                )}
+              >
+                <MdChatBubbleOutline size={23} />
 
-        <li className="flex justify-between my-2">
-          <Link href={"/profile"} className="w-full block ps-8 py-5">
-            Profile
-          </Link>
+                <span>Transaction History</span>
+              </Link>
 
-          {selected("/profile")}
-        </li>
-      </ul>
+              {selected("/transaction-history")}
+            </li>
+
+            <li className="flex justify-between items-center my-2">
+              <Link
+                href={"/search-history"}
+                className={cn(
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  active("/search-history"),
+                )}
+              >
+                <GoGear size={23} />
+
+                <span>Search History</span>
+              </Link>
+
+              {selected("/search-history")}
+            </li>
+
+            <li className="flex justify-between items-center my-2">
+              <Link
+                href={"/profile"}
+                className={cn(
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  active("/profile"),
+                )}
+              >
+                <GoGear size={23} />
+
+                <span>Profile</span>
+              </Link>
+
+              {selected("/profile")}
+            </li>
+          </ul>
+        </div>
+
+        <div className="">
+          <ul>
+            <li className="flex justify-between items-center my-2">
+              <Link
+                href={"/settings"}
+                className={cn(
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  active("/settings"),
+                )}
+              >
+                <CiCircleInfo size={23} />
+
+                <span>Settings</span>
+              </Link>
+
+              {selected("/settings")}
+            </li>
+
+            <li className="flex justify-between items-center my-2">
+              <Link
+                href={"/"}
+                className={cn(
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  active("/sign-out"),
+                )}
+              >
+                <PiSignOutThin size={23} />
+
+                <span>Sign Out</span>
+              </Link>
+
+              {selected("/sign-out")}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
