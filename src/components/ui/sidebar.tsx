@@ -35,10 +35,10 @@ export const Sidebar = () => {
           <ul>
             <li className="flex justify-between items-center my-2">
               <Link
-                href={"/search"}
+                href={"/search-cv"}
                 className={cn(
                   "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
-                  active("/search"),
+                  active("/search-cv"),
                 )}
               >
                 <BsGrid size={23} />
@@ -46,7 +46,7 @@ export const Sidebar = () => {
                 <span>Search CV</span>
               </Link>
 
-              {selected("/search")}
+              {selected("/search-cv")}
             </li>
 
             <li className="flex justify-between items-center my-2">
