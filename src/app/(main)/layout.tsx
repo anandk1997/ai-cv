@@ -28,7 +28,7 @@ const MainLayout = ({
           />
         </div>
 
-        <div className="h-full overflow-hidden roundeblock">{children}</div>
+        <div className="h-full overflow-hidden">{children}</div>
       </div>
     </div>
   );
