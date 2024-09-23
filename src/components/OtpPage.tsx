@@ -8,11 +8,36 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { AuthHeader } from "@/components/ui/auth";
+import { useParams } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { resendOtp, IVerifyOtp } from "@/lib/api";
+import { useSaveToken } from "@/hooks/useSaveToken";
 
-export const OtpPage = () => {
+interface OtpPageProps {
+  mutationFn: (data: IVerifyOtp) => Promise<any>;
+}
+
+export const OtpPage = ({ mutationFn }: OtpPageProps) => {
   const [value, setValue] = useState("");
   const [resendDisabled, setResendDisabled] = useState(true);
   const [timer, setTimer] = useState(30);
+
+  const saveToken = useSaveToken();
+  const { email: encodedEmail } = useParams();
+
+  const decodedEmail = Array.isArray(encodedEmail)
+    ? encodedEmail[0]
+    : encodedEmail;
+
+  const email = decodedEmail ? decodeURIComponent(decodedEmail) : "";
+
+  const { mutate: resend } = useMutation({
+    mutationFn: resendOtp,
+  });
+
+  const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
+    mutationFn,
+  });
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -34,17 +59,41 @@ export const OtpPage = () => {
     return () => clearInterval(interval);
   }, [resendDisabled]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      saveToken(data.access, data.refresh);
+    }
+  }, [isSuccess]);
+
   const handleResendOTP = () => {
     setResendDisabled(true);
+
+    resend({
+      email: email.toString(),
+    });
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    mutate({
+      email: email.toString(),
+      otp: value!,
+    });
+  };
+
+  const maskEmail = (email: string) => {
+    const [localPart, domain] = email.split("@");
+    return `${localPart.slice(0, 3)}***@${domain}`;
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <AuthHeader title="Otp verification" />
 
       <div className="flex flex-col font-semibold mb-7 mt-2">
         <span>We will send you a One Time Password on this</span>
-        <span>Email address: eu*******e@example.com</span>
+        <span>Email address: {maskEmail(email.toString())}</span>
       </div>
 
       <div className="flex justify-center">
@@ -58,8 +107,6 @@ export const OtpPage = () => {
             <InputOTPSlot index={1} />
             <InputOTPSlot index={2} />
             <InputOTPSlot index={3} />
-            <InputOTPSlot index={4} />
-            <InputOTPSlot index={5} />
           </InputOTPGroup>
         </InputOTP>
       </div>

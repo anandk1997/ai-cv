@@ -3,16 +3,19 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { BsGrid } from "react-icons/bs";
 import { CiCircleInfo } from "react-icons/ci";
 import { GoGear, GoStack } from "react-icons/go";
 import { MdChatBubbleOutline } from "react-icons/md";
 import { PiSignOutThin } from "react-icons/pi";
 import AICV from "@/images/ai-cv.png";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export const Sidebar = () => {
   const path = usePathname();
+  const router = useRouter();
 
   const selected = (pathName: string) =>
     path === pathName && (
@@ -21,6 +24,17 @@ export const Sidebar = () => {
 
   const active = (pathName: string) =>
     path === pathName ? "text-[#005dff] font-semibold" : "text-gray-400";
+
+  const logout = async () => {
+    try {
+      const { data } = await axios.delete("/api/token");
+
+      toast.success(data?.message);
+      router.push("/");
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   return (
     <div className="w-[35%] lg:w-[20%] bg-white py-8 flex flex-col gap-3 h-full overflow-auto">
@@ -140,17 +154,17 @@ export const Sidebar = () => {
             </li>
 
             <li className="flex justify-between items-center my-2">
-              <Link
-                href={"/"}
+              <button
                 className={cn(
                   "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3 text-sm md:text-base",
                   active("/sign-out"),
                 )}
+                onClick={logout}
               >
                 <PiSignOutThin size={23} />
 
                 <span>Sign Out</span>
-              </Link>
+              </button>
 
               {selected("/sign-out")}
             </li>

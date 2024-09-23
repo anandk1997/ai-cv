@@ -8,13 +8,23 @@ import { InputFloatedLabel } from "@/components/ui/InputFloatedLabel";
 import { useMutation } from "@tanstack/react-query";
 import { signup } from "@/lib/api";
 import { useMutationError } from "@/hooks/useMutationError";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export const SignUpPage = () => {
-  const { mutate, isPending, isSuccess, isError, error } = useMutation({
+  const router = useRouter();
+
+  const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
     mutationFn: signup,
   });
 
   useMutationError(isError, error);
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.push(`/sign-up/otp/${data.email}`);
+    }
+  }, [isSuccess]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -59,7 +69,7 @@ export const SignUpPage = () => {
             name="gender"
             className="h-12 border border-gray-300 rounded-md w-full px-4"
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select Gender
             </option>
 

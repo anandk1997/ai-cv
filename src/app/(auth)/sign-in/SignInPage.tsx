@@ -7,9 +7,15 @@ import { InputFloatedLabel } from "@/components/ui/InputFloatedLabel";
 import { useMutation } from "@tanstack/react-query";
 import { useMutationError } from "@/hooks/useMutationError";
 import { login } from "@/lib/api";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const SignInPage = () => {
-  const { mutate, isPending, isSuccess, isError, error } = useMutation({
+  const router = useRouter();
+
+  const [sentEmail, setSentEmail] = useState("");
+
+  const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
     mutationFn: login,
   });
 
@@ -21,8 +27,16 @@ export const SignInPage = () => {
     const formData = new FormData(e.target);
     const email = formData.get("email");
 
+    setSentEmail(email!.toString());
+
     mutate(email!.toString());
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.push(`/sign-in/otp/${sentEmail}`);
+    }
+  }, [isSuccess]);
 
   return (
     <>
