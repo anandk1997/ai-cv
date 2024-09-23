@@ -22,7 +22,7 @@ export const OtpPage = ({ mutationFn }: OtpPageProps) => {
   const [resendDisabled, setResendDisabled] = useState(true);
   const [timer, setTimer] = useState(30);
 
-  const saveToken = useSaveToken();
+  const { saveToken, isToken } = useSaveToken();
   const { email: encodedEmail } = useParams();
 
   const decodedEmail = Array.isArray(encodedEmail)
@@ -61,7 +61,7 @@ export const OtpPage = ({ mutationFn }: OtpPageProps) => {
 
   useEffect(() => {
     if (isSuccess) {
-      saveToken(data.access, data.refresh);
+      saveToken(data.access, data.refresh, data.id);
     }
   }, [isSuccess]);
 
@@ -114,8 +114,9 @@ export const OtpPage = ({ mutationFn }: OtpPageProps) => {
       <button
         className="rounded-lg bg-blue-600 text-white py-3 px-10 w-full mt-5"
         type="submit"
+        disabled={isPending || isToken}
       >
-        Confirm
+        {isPending || isToken ? "Loading" : "Confirm"}
       </button>
 
       <div className="font-semibold text-center mt-5 flex gap-2 justify-center items-center">

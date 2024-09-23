@@ -8,7 +8,7 @@ const MainLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="flex h-[100vh] w-[100%] bg-blue-100">
+    <div className="flex h-[100vh] w-[100%] bg-[rgb(243_243_243)]">
       <Sidebar />
 
       <div className="w-[80%] p-10">

@@ -12,6 +12,7 @@ import { PiSignOutThin } from "react-icons/pi";
 import AICV from "@/images/ai-cv.png";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { uselogout } from "@/hooks/uselogout";
 
 export const Sidebar = () => {
   const path = usePathname();
@@ -25,16 +26,7 @@ export const Sidebar = () => {
   const active = (pathName: string) =>
     path === pathName ? "text-[#005dff] font-semibold" : "text-gray-400";
 
-  const logout = async () => {
-    try {
-      const { data } = await axios.delete("/api/token");
-
-      toast.success(data?.message);
-      router.push("/");
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  const logout = uselogout();
 
   return (
     <div className="w-[35%] lg:w-[20%] bg-white py-8 flex flex-col gap-3 h-full overflow-auto">

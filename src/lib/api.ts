@@ -43,3 +43,24 @@ export const resendOtp = async (payload: IResendOtp) => {
   const { data } = await API.post("resend-otp/", payload);
   return data;
 };
+
+export const getProfile = async (id: string) => {
+  if (!id) return null;
+  const { data } = await API.get(`/${id}`);
+  return data;
+};
+
+interface IUpdateProfile {
+  id: string;
+  formData: FormData;
+}
+
+export const updateProfile = async ({ id, formData }: IUpdateProfile) => {
+  const { data } = await API.patch(`/${id}/`, formData);
+  return data;
+};
+
+export const deleteProfile = async (id: string) => {
+  const { data } = await API.delete(`/${id}`);
+  return data;
+};
