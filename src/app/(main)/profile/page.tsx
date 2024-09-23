@@ -15,25 +15,27 @@ const Profile = () => {
     <div className="bg-white h-full overflow-auto mt-4 p-12 rounded-3xl">
       <h1 className="font-semibold">Photo Profile</h1>
 
-      <section className="flex justify-between mt-3 mb-5">
-        <div className="flex align-middle items-center gap-6">
-          <Image
-            src="https://picsum.photos/id/237/200/300"
-            height={10}
-            width={10}
-            alt=""
-            className="h-16 w-16 rounded-full"
-          />
+      <section className="flex flex-col md:flex-row justify-between mt-3 mb-5 gap-2">
+        <div className="flex flex-col md:flex-row align-middle items-center gap-6">
+          <div className="flex gap-2 items-center">
+            <Image
+              src="https://picsum.photos/id/237/200/300"
+              height={10}
+              width={10}
+              alt=""
+              className="h-16 w-16 rounded-full"
+            />
 
-          <label
-            htmlFor="file"
-            className="cursor-pointer text-[#3B6BF6] font-semibold border border-[#3B6BF6] h-12 px-6 rounded-lg flex justify-center align-middle items-center"
-          >
-            <input type="file" className="hidden" name="" id="file" />
-            Upload New Picture
-          </label>
+            <label
+              htmlFor="file"
+              className="cursor-pointer text-[#3B6BF6] font-semibold border border-[#3B6BF6] h-12 px-6 rounded-lg flex justify-center align-middle items-center"
+            >
+              <input type="file" className="hidden" name="" id="file" />
+              Upload New Picture
+            </label>
+          </div>
 
-          <button className="bg-[#F8F8F8] h-12 px-6 font-semibold text-gray-700 rounded-lg">
+          <button className="bg-[#F8F8F8] h-12 px-6 font-semibold text-gray-700 rounded-lg w-full md:w-24">
             Delete
           </button>
         </div>
@@ -66,7 +68,7 @@ const Profile = () => {
           </button>
         </div>
 
-        <div className="flex justify-between gap-3 mt-3">
+        <div className="flex flex-col md:flex-row justify-between gap-3 mt-3">
           <div className="flex flex-col flex-1 gap-1">
             <label htmlFor="" className="text-gray-500 text-sm">
               First Name
@@ -90,7 +92,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="flex justify-between gap-3 mt-3">
+        <div className="flex flex-col md:flex-row justify-between gap-3 mt-3">
           <div className="flex flex-col flex-1 gap-1">
             <label htmlFor="" className="text-gray-500 text-sm">
               Gender
@@ -140,7 +142,7 @@ const Profile = () => {
           </button>
         </div>
 
-        <div className="flex justify-between gap-3 mt-3">
+        <div className="flex flex-col md:flex-row justify-between gap-3 mt-3">
           <div className="flex flex-col flex-1 gap-1">
             <label htmlFor="" className="text-gray-500 text-sm">
               Phone number
@@ -195,7 +197,7 @@ const Profile = () => {
             <select
               name="language"
               disabled={!isEdit3}
-              className="h-12 border border-gray-400 rounded-md w-[49%] px-4"
+              className="h-12 border border-gray-400 rounded-md w-full md:w-[49%] px-4"
             >
               <option value="male">English</option>
               <option value="female">Hindi</option>

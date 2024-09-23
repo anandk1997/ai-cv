@@ -14,7 +14,7 @@ const SearchHistory = () => {
             <Checkbox className="h-4 w-4 border-gray-400" />
 
             <div className="flex gap-4 align-middle items-center">
-              <div className="flex items-center gap-3 bg-white px-7 h-16 rounded-xl">
+              <div className="flex items-center gap-3 bg-white px-7 min-h-16 max-h-40 rounded-xl">
                 <Search size={20} strokeWidth={0.5} />
 
                 <span className="text-gray-400">

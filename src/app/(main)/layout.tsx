@@ -11,7 +11,7 @@ const MainLayout = ({
     <div className="flex h-[100vh] w-[100%] bg-blue-100">
       <Sidebar />
 
-      <div className="w-[80%] p-14">
+      <div className="w-[80%] p-10">
         <div className="flex justify-end align-middle items-center w-full gap-3">
           <div className="flex flex-col justify-end align-bottom items-end">
             <span className="font-semibold">Hi, Username</span>

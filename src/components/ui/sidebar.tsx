@@ -23,9 +23,15 @@ export const Sidebar = () => {
     path === pathName ? "text-[#005dff] font-semibold" : "text-gray-400";
 
   return (
-    <div className="w-[15%] bg-white py-8 flex flex-col gap-3 h-full overflow-auto">
-      <div className="flex items-center gap-2 ps-7 py-3 text-[#005dff] font-bold text-2xl">
-        <Image src={AICV} height={55} width={55} alt="" />
+    <div className="w-[35%] lg:w-[20%] bg-white py-8 flex flex-col gap-3 h-full overflow-auto">
+      <div className="flex items-center gap-2 ps-7 py-3 text-[#005dff] font-bold text-sm md:text-2xl">
+        <Image
+          src={AICV}
+          height={20}
+          width={20}
+          alt=""
+          className="h-8 w-8 md:h-14 md:w-14"
+        />
 
         <span className="">AI CV</span>
       </div>
@@ -37,7 +43,7 @@ export const Sidebar = () => {
               <Link
                 href={"/search-cv"}
                 className={cn(
-                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3 text-sm md:text-base",
                   active("/search-cv"),
                 )}
               >
@@ -53,7 +59,7 @@ export const Sidebar = () => {
               <Link
                 href={"/shortlisted"}
                 className={cn(
-                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3 text-sm md:text-base",
                   active("/shortlisted"),
                 )}
               >
@@ -69,7 +75,7 @@ export const Sidebar = () => {
               <Link
                 href={"/transaction-history"}
                 className={cn(
-                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3 text-sm md:text-base",
                   active("/transaction-history"),
                 )}
               >
@@ -85,7 +91,7 @@ export const Sidebar = () => {
               <Link
                 href={"/search-history"}
                 className={cn(
-                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3 text-sm md:text-base",
                   active("/search-history"),
                 )}
               >
@@ -101,7 +107,7 @@ export const Sidebar = () => {
               <Link
                 href={"/profile"}
                 className={cn(
-                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3 text-sm md:text-base",
                   active("/profile"),
                 )}
               >
@@ -121,7 +127,7 @@ export const Sidebar = () => {
               <Link
                 href={"/settings"}
                 className={cn(
-                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3 text-sm md:text-base",
                   active("/settings"),
                 )}
               >
@@ -137,7 +143,7 @@ export const Sidebar = () => {
               <Link
                 href={"/"}
                 className={cn(
-                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3",
+                  "flex align-middle items-center gap-3 w-full ps-8 py-3 my-3 text-sm md:text-base",
                   active("/sign-out"),
                 )}
               >

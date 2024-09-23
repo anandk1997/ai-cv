@@ -39,7 +39,7 @@ export const SignInPage = () => {
 
         <InputFloatedLabel label="Email address" name="email" required />
 
-        <div className="flex justify-between align-middle items-center mt-6">
+        <div className="flex justify-between align-middle items-center gap-2 mt-6">
           <Link href="/forgot-password" className="text-gray-600">
             Forgot password?
           </Link>
