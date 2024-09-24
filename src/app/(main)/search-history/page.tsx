@@ -23,7 +23,7 @@ const SearchHistory = () => {
                 </span>
               </div>
 
-              <button className="rounded-lg bg-blue-600 text-white h-12 w-56 text-sm">
+              <button className="rounded-lg bg-[linear-gradient(100deg,_#0075FF_0%,_#0135FF_100%)] text-white h-12 w-56 text-sm">
                 See Results
               </button>
             </div>
