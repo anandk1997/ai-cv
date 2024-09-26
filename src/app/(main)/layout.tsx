@@ -1,6 +1,5 @@
+import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/ui/sidebar";
-import Image from "next/image";
-import React from "react";
 
 const MainLayout = ({
   children,
@@ -12,21 +11,7 @@ const MainLayout = ({
       <Sidebar />
 
       <div className="w-[80%] p-10">
-        <div className="flex justify-end align-middle items-center w-full gap-3">
-          <div className="flex flex-col justify-end align-bottom items-end">
-            <span className="font-semibold">Hi, Username</span>
-
-            <span className="text-xs text-[#005DFF]">Credits left : 300</span>
-          </div>
-
-          <Image
-            src="https://picsum.photos/id/237/200/300"
-            height={10}
-            width={10}
-            alt=""
-            className="h-9 w-9 rounded-full"
-          />
-        </div>
+        <Navbar />
 
         <div className="h-full overflow-hidden">{children}</div>
       </div>

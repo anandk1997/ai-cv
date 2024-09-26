@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import AICV from "@/images/ai-cv1.png";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -26,9 +27,12 @@ export default function Home() {
               </ul>
             </div>
 
-            <button className="bg-[linear-gradient(102deg,_#0075FF_0%,_#0135FF_100%)] text-white text-xl px-8 py-3 rounded-2xl font-light">
+            <Link
+              href="/sign-in"
+              className="bg-[linear-gradient(102deg,_#0075FF_0%,_#0135FF_100%)] text-white text-xl px-8 py-3 rounded-2xl font-light"
+            >
               Login/Signup
-            </button>
+            </Link>
           </nav>
 
           <div className="mt-48 text-7xl text-center font-semibold">
