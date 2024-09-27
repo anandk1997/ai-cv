@@ -1,7 +1,7 @@
 import { API } from "@/config/apiClient";
 
 export const login = async (email: string) => {
-  const { data } = await API.post("login/", {
+  const { data } = await API.post("user/login/", {
     email,
   });
 
@@ -9,7 +9,7 @@ export const login = async (email: string) => {
 };
 
 export const verifyLogin = async (payload: IVerifyOtp) => {
-  const { data } = await API.post("verify-login/", payload);
+  const { data } = await API.post("user/verify-login/", payload);
   return data;
 };
 
@@ -21,7 +21,7 @@ interface ISignup {
 }
 
 export const signup = async (payload: ISignup) => {
-  const { data } = await API.post("signup/", payload);
+  const { data } = await API.post("user/signup/", payload);
   return data;
 };
 
@@ -31,7 +31,7 @@ export interface IVerifyOtp {
 }
 
 export const verifyOtp = async (payload: IVerifyOtp) => {
-  const { data } = await API.post("email-verify/", payload);
+  const { data } = await API.post("user/email-verify/", payload);
   return data;
 };
 
@@ -40,13 +40,13 @@ interface IResendOtp {
 }
 
 export const resendOtp = async (payload: IResendOtp) => {
-  const { data } = await API.post("resend-otp/", payload);
+  const { data } = await API.post("user/resend-otp/", payload);
   return data;
 };
 
 export const getProfile = async (id: string) => {
   if (!id) return null;
-  const { data } = await API.get(`/${id}`);
+  const { data } = await API.get(`user/${id}`);
   return data;
 };
 
@@ -56,11 +56,11 @@ interface IUpdateProfile {
 }
 
 export const updateProfile = async ({ id, formData }: IUpdateProfile) => {
-  const { data } = await API.patch(`/${id}/`, formData);
+  const { data } = await API.patch(`user/${id}/`, formData);
   return data;
 };
 
 export const deleteProfile = async (id: string) => {
-  const { data } = await API.delete(`/${id}`);
+  const { data } = await API.delete(`user/${id}`);
   return data;
 };

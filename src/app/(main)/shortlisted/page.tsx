@@ -1,9 +1,16 @@
 import { Checkbox } from "@/components/ui/auth/checkbox";
+import { getShortlistedCVs } from "@/lib/api";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import React from "react";
 import { GoDownload } from "react-icons/go";
 
 const Shortlisted = () => {
+  const { data: cvData } = useQuery({
+    queryKey: ["shortlisted-cv"],
+    queryFn: getShortlistedCVs,
+  });
+
   return (
     <>
       <h1 className="pb-7 text-2xl font-semibold">Search History</h1>

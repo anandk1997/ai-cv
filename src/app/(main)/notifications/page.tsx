@@ -1,6 +1,15 @@
+"use client";
+
+import { getNotifications } from "@/lib/api";
+import { useQuery } from "@tanstack/react-query";
 import { GoStack } from "react-icons/go";
 
 const Notifications = () => {
+  const { data: notifications } = useQuery({
+    queryKey: ["notifications"],
+    queryFn: getNotifications,
+  });
+
   return (
     <>
       <div className="h-[calc(100%_-_16px)] overflow-auto mt-4">
