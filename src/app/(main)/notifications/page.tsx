@@ -31,7 +31,7 @@ const Notifications = () => {
 
         <div className="mt-4">
           {Array.from({ length: 20 }).map(() => (
-            <div className="mt-6">
+            <div className="mt-6" key={Math.random()}>
               <span className="text-gray-400 text-xs">Today</span>
 
               <div className="flex justify-between items-center mt-5 w-full md:w-[70%]">

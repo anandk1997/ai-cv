@@ -10,7 +10,10 @@ const SearchHistory = () => {
 
       <div className="w-full rounded-md h-[calc(100%_-_80px)] overflow-auto p-6">
         {Array.from({ length: 20 }).map(() => (
-          <div className="flex gap-4 align-middle items-center mb-3">
+          <div
+            className="flex gap-4 align-middle items-center mb-3"
+            key={Math.random()}
+          >
             <Checkbox className="h-4 w-4 border-gray-400" />
 
             <div className="flex gap-4 align-middle items-center">

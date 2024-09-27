@@ -3,7 +3,7 @@
 import { useGetSession } from "@/hooks/useGetToken";
 import { uselogout } from "@/hooks/uselogout";
 import { deleteProfile, getProfile, updateProfile } from "@/lib/api";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useReducer } from "react";
@@ -11,8 +11,22 @@ import toast from "react-hot-toast";
 import { PiPencilSimpleLineThin } from "react-icons/pi";
 import { SlArrowRight } from "react-icons/sl";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 const Profile = () => {
   const [isEdit1, setIsEdit1] = useReducer((prev) => !prev, false);
+
+  const queryClient = useQueryClient();
 
   const { data: session } = useGetSession();
 
@@ -85,8 +99,10 @@ const Profile = () => {
 
   useEffect(() => {
     if (isUpdated) {
-      setIsEdit1();
+      queryClient.refetchQueries({ queryKey: ["profile"] });
+
       toast.success("Profile updated successfully");
+      setIsEdit1();
     }
   }, [isUpdated]);
 
@@ -100,8 +116,8 @@ const Profile = () => {
     <div className="bg-white h-full overflow-auto mt-4 p-12 rounded-3xl">
       <h1 className="font-semibold">Photo Profile</h1>
 
-      <section className="flex flex-col md:flex-row justify-between mt-3 mb-5 gap-2">
-        <div className="flex flex-col md:flex-row align-middle items-center gap-6">
+      <section className="flex flex-col lg:flex-row justify-between mt-3 mb-5 gap-2">
+        <div className="flex flex-col lg:flex-row align-middle items-center gap-6">
           <div className="flex gap-2 items-center">
             <Image
               src="https://picsum.photos/id/237/200/300"
@@ -127,7 +143,7 @@ const Profile = () => {
             </label>
           </div>
 
-          <button className="bg-[#F8F8F8] h-12 px-6 font-semibold text-gray-700 rounded-lg w-full md:w-24">
+          <button className="bg-[#F8F8F8] h-12 px-6 font-semibold text-gray-700 rounded-lg w-full lg:w-24">
             Delete
           </button>
         </div>
@@ -293,15 +309,38 @@ const Profile = () => {
         </section>
       </form>
 
-      <button
-        className="bg-[#FF342D] flex justify-center gap-2 items-center px-6 h-12 rounded-md text-white text-sm mt-14"
-        onClick={() => del(session?.user?.id)}
-        disabled={isPending}
-      >
-        <span>{isPending ? "Processing" : "Delete Account"}</span>
+      <AlertDialog>
+        <AlertDialogTrigger
+          className="bg-[#FF342D] flex justify-center gap-2 items-center px-6 h-12 rounded-md text-white text-sm mt-14"
+          disabled={isPending}
+        >
+          <span>{isPending ? "Processing" : "Delete Account"}</span>
+          <SlArrowRight />
+        </AlertDialogTrigger>
 
-        <SlArrowRight />
-      </button>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+            <AlertDialogAction
+              className="bg-red-600 hover:bg-red-500"
+              onClick={() => del(session?.user?.id)}
+              disabled={isPending}
+            >
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

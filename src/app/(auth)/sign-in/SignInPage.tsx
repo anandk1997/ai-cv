@@ -15,7 +15,7 @@ export const SignInPage = () => {
 
   const [sentEmail, setSentEmail] = useState("");
 
-  const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
+  const { mutate, isPending, isSuccess, isError, error } = useMutation({
     mutationFn: login,
   });
 
@@ -53,11 +53,7 @@ export const SignInPage = () => {
 
         <InputFloatedLabel label="Email address" name="email" required />
 
-        <div className="flex justify-between align-middle items-center gap-2 mt-6">
-          <Link href="/forgot-password" className="text-gray-600">
-            Forgot password?
-          </Link>
-
+        <div className="flex justify-end align-middle items-center gap-2 mt-6">
           <button
             type="submit"
             disabled={isPending}

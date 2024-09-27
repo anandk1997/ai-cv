@@ -29,7 +29,7 @@ export const Sidebar = () => {
   const logout = uselogout();
 
   return (
-    <div className="w-[35%] lg:w-[20%] bg-white py-8 flex flex-col gap-3 h-full overflow-auto">
+    <div className="w-[30%] lg:w-[20%] bg-white py-8 flex flex-col gap-3 h-full overflow-auto">
       <div className="flex items-center gap-2 ps-7 py-3 text-[#005dff] font-bold text-sm md:text-2xl">
         <Image
           src={AICV}

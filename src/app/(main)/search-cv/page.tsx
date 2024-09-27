@@ -12,7 +12,7 @@ const SearchCV = () => {
 
       <div className="flex flex-wrap justify-center gap-4 h-[calc(100%_-_80px)] overflow-auto">
         {Array.from({ length: 20 }).map(() => (
-          <Link href={"cv-details"}>
+          <Link href={"cv-details"} key={Math.random()}>
             <div className="bg-white rounded-3xl w-72 pt-5 px-2 pb-2 cursor-pointer">
               <div className="ps-3">
                 <h2 className="text-xl font-semibold">John Doe</h2>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import AICV from "@/images/ai-cv1.png";
+import AICV from "@/images/ai-cv-dash.png";
 import Link from "next/link";
 
 export default function Home() {

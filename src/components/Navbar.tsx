@@ -16,7 +16,10 @@ export const Navbar = () => {
   return (
     <div className="flex justify-end align-middle items-center w-full gap-3">
       <div className="flex flex-col justify-end align-bottom items-end">
-        <span className="font-semibold">Hi, Username</span>
+        <span className="font-semibold">
+          Hi,
+          {`${profileData?.first_name ?? ""} ${profileData?.last_name ?? ""}`}
+        </span>
 
         <span className="text-xs text-[#005DFF]">Credits left : 300</span>
       </div>
