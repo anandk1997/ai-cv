@@ -1,3 +1,5 @@
+"use client";
+
 import { Checkbox } from "@/components/ui/auth/checkbox";
 import { getShortlistedCVs } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";

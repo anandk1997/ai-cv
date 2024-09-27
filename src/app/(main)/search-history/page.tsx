@@ -1,9 +1,16 @@
 "use client";
 
 import { Checkbox } from "@/components/ui/auth/checkbox";
+import { searchCvHistory } from "@/lib/api";
+import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 
 const SearchHistory = () => {
+  const { data: cvDatas } = useQuery({
+    queryKey: ["shortlisted-cvs"],
+    queryFn: searchCvHistory,
+  });
+
   return (
     <>
       <h1 className="pb-7 text-2xl font-semibold">Search History</h1>
