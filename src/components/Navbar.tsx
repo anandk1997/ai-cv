@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/hooks/useAuth";
 import { useGetSession } from "@/hooks/useGetToken";
 import { getProfile } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
@@ -12,6 +13,8 @@ export const Navbar = () => {
     queryKey: ["profile", session?.user?.id],
     queryFn: () => getProfile(session?.user?.id),
   });
+
+  useAuth();
 
   return (
     <div className="flex justify-end align-middle items-center w-full gap-3">

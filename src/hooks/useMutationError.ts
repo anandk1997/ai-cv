@@ -1,11 +1,15 @@
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
-export const useMutationError = (isError: any, error: any) => {
+export const useMutationError = (isError: boolean, error: any) => {
   useEffect(() => {
     const axiosError = error as any;
 
     if (isError)
-      toast.error(axiosError?.response?.data?.detail || "An error occurred");
+      toast.error(
+        axiosError?.response?.data?.detail ||
+          axiosError?.response?.data?.error ||
+          "An error occurred",
+      );
   }, [isError]);
 };

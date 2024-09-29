@@ -39,7 +39,7 @@ export const shortlistCV = async (payload: IShortlisted) => {
   return data;
 };
 
-export const unShortlistCV = async (id: string) => {
+export const unShortlistCV = async (id: number) => {
   const { data } = await API.delete(`remove-shortlist-cv/${id}/`);
   return data;
 };

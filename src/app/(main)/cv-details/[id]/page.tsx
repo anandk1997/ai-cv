@@ -1,9 +1,28 @@
+"use client";
+
+import { useMutationError } from "@/hooks/useMutationError";
+import { cvDetails } from "@/lib/api";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 import { FiPhoneCall } from "react-icons/fi";
 import { IoMdMail } from "react-icons/io";
 import { PiDownloadSimpleLight } from "react-icons/pi";
 import { TbChecklist } from "react-icons/tb";
 
 const CvDetails = () => {
+  const { id } = useParams();
+
+  const {
+    data: cvData,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["cv-details", id],
+    queryFn: () => cvDetails(id?.toString()),
+  });
+
+  useMutationError(isError, error);
+
   return (
     <div className="h-[calc(100%_-_9px)] overflow-auto ">
       <div className="flex gap-2 my-5">

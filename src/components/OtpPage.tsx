@@ -10,10 +10,11 @@ import {
 import { AuthHeader } from "@/components/ui/auth";
 import { useParams } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { resendOtp, IVerifyOtp } from "@/lib/api";
+import { resendOtp } from "@/lib/api";
 import { useSaveToken } from "@/hooks/useSaveToken";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { IVerifyOtp } from "@/lib/api/user";
 
 interface OtpPageProps {
   mutationFn: (data: IVerifyOtp) => Promise<any>;
