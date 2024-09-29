@@ -1,6 +1,17 @@
+'use client'
+
+
 import { Switch } from "@/components/ui/switch";
+import Link from "next/link";
+import { useRouter } from 'next/navigation'
+
+
 
 const BuyCredits = () => {
+  const router = useRouter()
+
+
+
   return (
     <>
       <div className="flex flex-col justify-center align-middle items-center gap-14 h-[100vh] w-full bg-[hsl(216deg_40.54%_92.75%)]">
@@ -34,9 +45,10 @@ const BuyCredits = () => {
 
           <div className="font-bold text-4xl">$45</div>
 
-          <button className="bg-[linear-gradient(93deg,_#0075FF_0%,_#0135FF_100%)] text-white px-10 py-4 rounded-lg mt-8 w-[50%]">
+          <button onClick={() => router.push('/payment-methods')} className="bg-[linear-gradient(93deg,_#0075FF_0%,_#0135FF_100%)] text-white px-10 py-4 rounded-lg mt-8 w-[50%]">
             Buy now
           </button>
+          
         </div>
       </div>
     </>

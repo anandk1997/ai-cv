@@ -1,20 +1,28 @@
 import { ICandidateProfile } from "@/app/(main)/search-cv/page";
+import { LoaderCircleIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { FiPhoneCall } from "react-icons/fi";
 import { IoMdMail } from "react-icons/io";
 import { PiDownloadSimpleLight } from "react-icons/pi";
 import { TbChecklist } from "react-icons/tb";
+import { Loader } from "./Loader";
 
 const CvList = ({
   data,
   isShortlisting,
   onShortlist,
+  loading
 }: {
   data: ICandidateProfile[];
   isShortlisting: boolean;
   onShortlist: any;
+  loading: boolean;
 }) => {
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <>
       {!!!data?.length ? (

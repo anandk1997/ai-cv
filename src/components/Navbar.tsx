@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useGetSession } from "@/hooks/useGetToken";
 import { getProfile } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import Image from "next/image";
 
 export const Navbar = () => {
@@ -24,7 +25,12 @@ export const Navbar = () => {
           {`${profileData?.first_name ?? ""} ${profileData?.last_name ?? ""}`}
         </span>
 
-        <span className="text-xs text-[#005DFF]">Credits left : 300</span>
+        <Link
+                href={"/buy-credits"}
+                className="text-xs text-[#005DFF]"
+              >Credits left : 300
+                </Link>
+        {/* <span className="text-xs text-[#005DFF]">Credits left : 300</span> */}
       </div>
 
       <Image

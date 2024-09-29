@@ -4,9 +4,13 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { BsStripe } from "react-icons/bs";
 import { FaRegCreditCard } from "react-icons/fa";
+import { useRouter } from 'next/navigation'
+
 
 const PaymentMethods = () => {
   const [selected, setSelected] = useState("");
+  const router = useRouter()
+
 
   return (
     <>
@@ -64,6 +68,7 @@ const PaymentMethods = () => {
             </button>
 
             <button
+              onClick={() => router.push('/transaction-detail')}
               className="bg-[linear-gradient(93deg,_#0075FF_0%,_#0135FF_100%)] text-white px-10 py-4 rounded-lg mt-8"
               disabled={!selected}
             >

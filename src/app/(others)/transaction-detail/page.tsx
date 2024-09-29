@@ -1,5 +1,9 @@
+"use client"
+
 import { Checkbox } from "@/components/ui/auth/checkbox";
 import { TbTriangleInvertedFilled } from "react-icons/tb";
+import { useRouter } from 'next/navigation'
+
 
 const TransactionDetails = () => {
   const months = Array.from({ length: 12 }, (_, i) => (
@@ -9,6 +13,8 @@ const TransactionDetails = () => {
   ));
 
   const currentYear = new Date().getFullYear();
+  const router = useRouter()
+
 
   const years = Array.from({ length: 10 }, (_, i) => (
     <option key={i} value={currentYear + i}>
@@ -146,7 +152,9 @@ const TransactionDetails = () => {
               Cancel
             </button>
 
-            <button className="bg-[linear-gradient(93deg,_#0075FF_0%,_#0135FF_100%)] text-white px-10 py-4 rounded-lg mt-8">
+            <button               
+              onClick={() => router.push('/payment-successfull')}
+              className="bg-[linear-gradient(93deg,_#0075FF_0%,_#0135FF_100%)] text-white px-10 py-4 rounded-lg mt-8">
               Continue
             </button>
           </div>

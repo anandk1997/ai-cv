@@ -21,7 +21,7 @@ const SearchCVHistoryDetails = () => {
     queryFn: () => searchCvHistoryDetails(id?.toString()),
   });
 
-  const { isPending1, mutate1 } = useCvList();
+  const { isPending ,isPending1, mutate1 } = useCvList();
 
   useMutationError(isError2, error2);
 
@@ -37,6 +37,7 @@ const SearchCVHistoryDetails = () => {
             data={data2?.result}
             isShortlisting={isPending1}
             onShortlist={mutate1}
+            loading={isPending}
           />
         )}
       </div>

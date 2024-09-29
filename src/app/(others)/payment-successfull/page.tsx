@@ -1,6 +1,12 @@
+"use client"
+
 import { GoChecklist } from "react-icons/go";
+import { useRouter } from 'next/navigation'
+
 
 const PaymentSuccess = () => {
+  const router = useRouter()
+
   return (
     <>
       <div className="flex flex-col justify-center align-middle items-center gap-10 h-[calc(100%_-_22px)] py-8 overflow-auto w-full bg-[hsl(216deg_40.54%_92.75%)]">
@@ -59,7 +65,9 @@ const PaymentSuccess = () => {
             <span className="font-semibold">$49.00</span>
           </div>
 
-          <button className="bg-[linear-gradient(93deg,_#0075FF_0%,_#0135FF_100%)] text-white px-10 py-3 rounded-lg mt-8 w-[75%] flex justify-center mx-auto">
+          <button 
+            onClick={() => router.push('/search-cv')}
+            className="bg-[linear-gradient(93deg,_#0075FF_0%,_#0135FF_100%)] text-white px-10 py-3 rounded-lg mt-8 w-[75%] flex justify-center mx-auto">
             Continue Shopping
           </button>
         </div>

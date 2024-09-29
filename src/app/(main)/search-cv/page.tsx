@@ -31,7 +31,7 @@ const SearchCV = () => {
       </form>
 
       <div className="flex flex-wrap justify-center gap-4 h-[calc(100%_-_217px)] overflow-auto">
-        <CvList data={data} isShortlisting={isPending1} onShortlist={mutate1} />
+        <CvList data={data} isShortlisting={isPending1} onShortlist={mutate1} loading={isPending} />
       </div>
     </>
   );

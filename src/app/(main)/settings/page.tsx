@@ -57,11 +57,11 @@ const Settings = () => {
 
       <div className="flex flex-col justify-between h-[90%]">
         <div className="flex flex-col gap-4">
-          <button className="bg-[hsl(217.5deg_100%_96.86%)] rounded-lg text-black font-bold text-lg px-4 py-6 flex items-center gap-4">
+          {/* <button className="bg-[hsl(217.5deg_100%_96.86%)] rounded-lg text-black font-bold text-lg px-4 py-6 flex items-center gap-4">
             <IoMdUnlock size={25} className="text-blue-600" />
             Change Password
             <MdArrowForwardIos size={25} className="flex ms-auto" />
-          </button>
+          </button> */}
 
           <AlertDialog>
             <AlertDialogTrigger
