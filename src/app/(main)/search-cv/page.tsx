@@ -59,8 +59,7 @@ const SearchCV = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="flex gap-2 my-5">
-          <input
-            type="search"
+          <textarea
             placeholder="Search CV..."
             className="px-4 pb-16 pt-5 rounded-xl w-[70%]"
             name="search"

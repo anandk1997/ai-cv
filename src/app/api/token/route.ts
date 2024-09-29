@@ -16,7 +16,10 @@ export async function POST(request: NextRequest) {
     cookies().set("refresh", refresh, { expires, httpOnly: true });
     cookies().set("user", user, { expires, httpOnly: true });
 
-    return NextResponse.json({ data: "orders" }, { status: 200 });
+    return NextResponse.json(
+      { message: "logged in successfully" },
+      { status: 200 },
+    );
   } catch (error) {
     console.error("error", error);
 
