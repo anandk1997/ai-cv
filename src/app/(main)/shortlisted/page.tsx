@@ -56,7 +56,7 @@ const Shortlisted = () => {
               className="flex gap-4 align-middle items-center mb-3"
               key={Math.random()}
             >
-              <Checkbox className="h-4 w-4 border-gray-400" />
+              {/* <Checkbox className="h-4 w-4 border-gray-400" /> */}
 
               <div className="flex gap-4 align-middle items-center">
                 <div className="flex items-center gap-3 bg-white px-7 min-h-16 max-h-40 rounded-xl">

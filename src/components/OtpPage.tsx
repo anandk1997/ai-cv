@@ -15,6 +15,7 @@ import { useSaveToken } from "@/hooks/useSaveToken";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { IVerifyOtp } from "@/lib/api/user";
+import { useMutationError } from "@/hooks/useMutationError";
 
 interface OtpPageProps {
   mutationFn: (data: IVerifyOtp) => Promise<any>;
@@ -38,11 +39,13 @@ export const OtpPage = ({ mutationFn }: OtpPageProps) => {
     mutate: resend,
     isSuccess: isResent,
     isPending: isSending,
+    isError: isError1,
+    error: error1,
   } = useMutation({
     mutationFn: resendOtp,
   });
 
-  const { mutate, isPending, isSuccess, data } = useMutation({
+  const { mutate, isPending, isSuccess, data, isError, error } = useMutation({
     mutationFn,
   });
 
@@ -98,6 +101,9 @@ export const OtpPage = ({ mutationFn }: OtpPageProps) => {
     const [localPart, domain] = email?.split("@");
     return `${localPart.slice(0, 3)}***@${domain}`;
   };
+
+  useMutationError(isError, error);
+  useMutationError(isError1, error1);
 
   return (
     <form onSubmit={handleSubmit}>

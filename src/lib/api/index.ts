@@ -14,8 +14,7 @@ import { getNotifications, markRead } from "./notifications";
 import {
   searchCV,
   searchCvHistory,
-  cvDetails,
-  deleteCV,
+  deleteSearchHistory,
   getShortlistedCVs,
   shortlistCV,
   unShortlistCV,
@@ -37,8 +36,7 @@ export { getNotifications, markRead };
 export {
   searchCV,
   searchCvHistory,
-  cvDetails,
-  deleteCV,
+  deleteSearchHistory,
   getShortlistedCVs,
   shortlistCV,
   unShortlistCV,

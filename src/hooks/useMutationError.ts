@@ -8,8 +8,13 @@ export const useMutationError = (isError: boolean, error: any) => {
     if (isError)
       toast.error(
         axiosError?.response?.data?.detail ||
+          axiosError?.response?.data?.message ||
           axiosError?.response?.data?.error ||
           "An error occurred",
       );
+
+    if (!!axiosError?.response?.data?.error) {
+      toast.error(axiosError?.response?.data?.error);
+    }
   }, [isError]);
 };

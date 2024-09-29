@@ -10,8 +10,6 @@ import { GoGear, GoStack } from "react-icons/go";
 import { MdChatBubbleOutline } from "react-icons/md";
 import { PiSignOutThin } from "react-icons/pi";
 import AICV from "@/images/ai-cv.png";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { uselogout } from "@/hooks/uselogout";
 
 export const Sidebar = () => {
@@ -19,7 +17,7 @@ export const Sidebar = () => {
   const router = useRouter();
 
   const selected = (pathName: string) =>
-    path === pathName && (
+    path.includes(pathName) && (
       <span className="border-r-4 h-12 rounded-md border-blue-500" />
     );
 

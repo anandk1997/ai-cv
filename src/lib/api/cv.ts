@@ -14,13 +14,13 @@ export const searchCvHistory = async () => {
   return data;
 };
 
-export const cvDetails = async (id: string) => {
+export const searchCvHistoryDetails = async (id: string) => {
   const { data } = await API.get(`cv-search-history/${id}/`);
   return data;
 };
 
-export const deleteCV = async (id: string) => {
-  const { data } = await API.get(`cv-search-history/${id}/`);
+export const deleteSearchHistory = async (id: string) => {
+  const { data } = await API.delete(`cv-search-history/${id}/`);
   return data;
 };
 
