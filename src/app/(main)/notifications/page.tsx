@@ -1,6 +1,9 @@
 "use client";
 
+import { useGetSession } from "@/hooks/useGetToken";
+import { useWebSocket } from "@/hooks/useWebSocket";
 import { getNotifications } from "@/lib/api";
+import { env } from "@/lib/env/intex";
 import { useQuery } from "@tanstack/react-query";
 import { GoStack } from "react-icons/go";
 
@@ -9,6 +12,14 @@ const Notifications = () => {
     queryKey: ["notifications"],
     queryFn: getNotifications,
   });
+
+  const { data: session } = useGetSession();
+
+  const wsUrl = `${env.SOCKET_URL}/notifications/?token=${session?.access}`;
+
+  const { messages } = useWebSocket(wsUrl);
+
+  console.log("messages=", messages);
 
   return (
     <>
