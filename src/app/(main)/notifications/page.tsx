@@ -21,7 +21,16 @@ const Notifications = () => {
   const { messages, setMessages } = useWebSocket(wsUrl);
 
   useEffect(() => {
-    setMessages((prev) => [...prev, notifications]);
+    console.log(notifications)
+   // setMessages((prev) => [...prev, notifications]);
+   setMessages((prev) => [
+    ...prev,
+    ...(Array.isArray(notifications) 
+      ? notifications.filter(notification => notification !== null) 
+      : notifications ? [notifications] : []
+    )
+  ]);
+    console.log(messages)
   }, [notifications]);
 
   return (
@@ -53,7 +62,7 @@ const Notifications = () => {
         </div>
 
         <div className="mt-4">
-          {messages?.map((item: any) => (
+          {messages?.slice().reverse().map((item: any) => (
             <div className="mt-6" key={Math.random()}>
               <span className="text-gray-400 text-xs">Today</span>
 

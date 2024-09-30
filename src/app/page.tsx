@@ -3,6 +3,7 @@
 import Image from "next/image";
 import AICV from "@/images/ai-cv-dash.png";
 import AICV2 from "@/images/ai-cv2.png";
+import SSIMG from "@/images/image.png";
 import DEMO from "@/images/demo.png";
 import Link from "next/link";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
@@ -65,12 +66,16 @@ export default function Home() {
           </button>
 
           <div className="flex flex-col justify-center items-center gap-2">
-            <span className="text-4xl">Features</span>
+            <span className="text-5xl">Features</span>
             <span>
               AI Powered CV Matching Advanced Search Filters secure and Private
               Searches Instant results.
             </span>
+
+            <Image src={SSIMG} height={500}  alt="" className="mt-8" />
           </div>
+    
+         
 
           <button className="bg-[linear-gradient(102deg,_#0075FF_0%,_#0135FF_100%)] text-white text-xl px-12 py-4 rounded-2xl font-light flex mx-auto mt-7 mb-28">
             Search CV
@@ -86,7 +91,7 @@ export default function Home() {
           </div>
 
           <div className="flex">
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center p-10">
               <div className="flex justify-end items-center w-full">
                 <div className="border-8 border-[#E5E5E5] bg-[#015AFF] rounded-full h-16 w-16 text-white flex justify-center items-center font-semibold text-2xl">
                   1
@@ -106,19 +111,19 @@ export default function Home() {
                 cumque, officia ipsa tenetur.
               </span>
             </div>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center p-10">
               <div className="flex items-center w-full">
                 <hr className="border-t border-gray-300 min-w-24 w-[39%]" />
                 <div className="border-8 border-[#E5E5E5] bg-[#015AFF] rounded-full h-16 w-16 text-white flex justify-center items-center font-semibold text-2xl">
-                  1
+                  2
                 </div>
 
                 <hr className="border-t border-gray-300 min-w-24 w-[39%]" />
               </div>
 
               <h2 className="font-semibold text-2xl flex flex-col justify-center items-center">
-                <span>Enter Job</span>
-                <span>Description</span>
+                <span>AI maches the</span>
+                <span>CV</span>
               </h2>
               <span>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -127,19 +132,19 @@ export default function Home() {
                 cumque, officia ipsa tenetur.
               </span>
             </div>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center p-10">
               <div className="flex items-center w-full">
                 <hr className="border-t border-gray-300 min-w-24 w-[39%]" />
                 <div className="border-8 border-[#E5E5E5] bg-[#015AFF] rounded-full h-16 w-16 text-white flex justify-center items-center font-semibold text-2xl">
-                  1
+                  3
                 </div>
 
                 <hr className="border-t border-gray-300 min-w-24 w-[39%]" />
               </div>
 
               <h2 className="font-semibold text-2xl flex flex-col justify-center items-center">
-                <span>Enter Job</span>
-                <span>Description</span>
+                <span>Review and</span>
+                <span>Select</span>
               </h2>
               <span>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -148,17 +153,17 @@ export default function Home() {
                 cumque, officia ipsa tenetur.
               </span>
             </div>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center p-10">
               <div className="flex items-center w-full">
                 <hr className="border-t border-gray-300 min-w-24 w-[39%]" />
                 <div className="border-8 border-[#E5E5E5] bg-[#015AFF] rounded-full h-16 w-16 text-white flex justify-center items-center font-semibold text-2xl">
-                  1
+                  4
                 </div>
               </div>
 
               <h2 className="font-semibold text-2xl flex flex-col justify-center items-center">
-                <span>Enter Job</span>
-                <span>Description</span>
+                <span>Download with</span>
+                <span>Credits</span>
               </h2>
               <span>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -167,7 +172,13 @@ export default function Home() {
                 cumque, officia ipsa tenetur.
               </span>
             </div>
+
+            
           </div>
+
+          <button className="bg-[linear-gradient(102deg,_#0075FF_0%,_#0135FF_100%)] text-white text-xl px-16 py-5 rounded-2xl font-light flex mx-auto mt-7 mb-28">
+            Get Started
+          </button>
         </section>
 
         <section className="py-24 px-40 bg-[rgb(243_243_243)]">
