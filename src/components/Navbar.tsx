@@ -6,8 +6,12 @@ import { getProfile } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import Image from "next/image";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 export const Navbar = () => {
+  const path = usePathname();
   const { data: session } = useGetSession();
 
   const { data: profileData } = useQuery({
@@ -16,6 +20,8 @@ export const Navbar = () => {
   });
 
   useAuth();
+
+  const active = path === "/notifications";
 
   return (
     <div className="flex justify-end align-middle items-center w-full gap-3">
@@ -28,8 +34,18 @@ export const Navbar = () => {
         <Link href={"/buy-credits"} className="text-xs text-[#005DFF]">
           Credits left : 300
         </Link>
-        {/* <span className="text-xs text-[#005DFF]">Credits left : 300</span> */}
       </div>
+
+      <Link
+        href="/notifications"
+        className={cn(
+          active
+            ? "border border-blue-500 rounded-full text-blue-500"
+            : "border border-transparent",
+        )}
+      >
+        <IoIosNotificationsOutline size={35} />
+      </Link>
 
       <Image
         src="https://picsum.photos/id/237/200/300"

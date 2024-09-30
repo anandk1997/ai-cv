@@ -19,5 +19,5 @@ export const useWebSocket = (url: string) => {
     };
   }, [url]);
 
-  return { messages };
+  return { messages, setMessages };
 };

@@ -5,6 +5,7 @@ import { useWebSocket } from "@/hooks/useWebSocket";
 import { getNotifications } from "@/lib/api";
 import { env } from "@/lib/env/intex";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { GoStack } from "react-icons/go";
 
 const Notifications = () => {
@@ -17,9 +18,11 @@ const Notifications = () => {
 
   const wsUrl = `${env.SOCKET_URL}/notifications/?token=${session?.access}`;
 
-  const { messages } = useWebSocket(wsUrl);
+  const { messages, setMessages } = useWebSocket(wsUrl);
 
-  console.log("messages=", messages);
+  useEffect(() => {
+    setMessages((prev) => [...prev, notifications]);
+  }, [notifications]);
 
   return (
     <>
@@ -50,7 +53,7 @@ const Notifications = () => {
         </div>
 
         <div className="mt-4">
-          {Array.from({ length: 20 }).map(() => (
+          {messages?.map((item: any) => (
             <div className="mt-6" key={Math.random()}>
               <span className="text-gray-400 text-xs">Today</span>
 
@@ -61,33 +64,17 @@ const Notifications = () => {
                   </span>
 
                   <div className="flex flex-col gap-1">
-                    <span className="">lorem Ipsum</span>
+                    <span className="">{item?.user?.email}</span>
 
                     <span className="text-gray-400 text-xs">
-                      Lorem ipsum dolor sit amet consectetur.
+                      {item?.message}
                     </span>
                   </div>
                 </div>
 
-                <span className="text-gray-400 text-sm">14:36</span>
-              </div>
-
-              <div className="flex justify-between items-center mt-5 w-full md:w-[70%]">
-                <div className="flex items-center gap-4">
-                  <span className="text-white bg-gray-300 rounded-full h-10 w-10 flex justify-center items-center">
-                    <GoStack size={17} />
-                  </span>
-
-                  <div className="flex flex-col gap-1">
-                    <span className="">lorem Ipsum</span>
-
-                    <span className="text-gray-400 text-xs">
-                      Lorem ipsum dolor sit amet consectetur.
-                    </span>
-                  </div>
-                </div>
-
-                <span className="text-gray-400 text-sm">14:36</span>
+                <span className="text-gray-400 text-sm">
+                  {item?.created_at}
+                </span>
               </div>
             </div>
           ))}
