@@ -2,7 +2,11 @@
 
 import Image from "next/image";
 import AICV from "@/images/ai-cv-dash.png";
+import AICV2 from "@/images/ai-cv2.png";
+import DEMO from "@/images/demo.png";
 import Link from "next/link";
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function Home() {
   return (
@@ -161,6 +165,113 @@ export default function Home() {
                 Doloribus id minima vel sit, nisi iure laborum ullam iusto
                 exercitationem quidem natus fugiat eveniet suscipit culpa earum
                 cumque, officia ipsa tenetur.
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 px-40 bg-[rgb(243_243_243)]">
+          <h1 className="flex flex-col text-4xl font-bold">
+            What our clients think
+            <span>
+              <span className="text-[#015AFF] italic font-thin">about</span> AI
+              CV
+            </span>
+          </h1>
+
+          <div className="rounded-2xl bg-white ps-10 py-14 mt-8">
+            <div className="max-w-[60%] text-xl">
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consequuntur, id! Fugit perferendis, mollitia, aperiam officiis
+              deserunt, odio perspiciatis voluptatem blanditiis ducimus labore
+              animi. Eaque, tempora!"
+            </div>
+
+            <h2 className="text-lg font-extrabold mt-16">John Doe</h2>
+
+            <div className="font-semibold text-md">Product Marketer, Lorem</div>
+
+            <div className="flex mt-6 justify-between items-center gap-4">
+              <div className="font-extrabold text-4xl">Logo</div>
+
+              <div className="bg-[#015AFF] h-2 w-full"></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[hsl(223.78deg_64.91%_11.18%)] ps-24 pr-14 text-white py-16">
+          <div className="flex flex-wrap justify-between w-full border-b border-gray-700 pb-16">
+            <ul className="w-[22%]">
+              <li className="font-bold">Product</li>
+              <li className="text-sm text-gray-400 py-2">Employee database</li>
+              <li className="text-sm text-gray-400 py-2">Payroll</li>
+              <li className="text-sm text-gray-400 py-2">Absences</li>
+              <li className="text-sm text-gray-400 py-2">Time tracking</li>
+              <li className="text-sm text-gray-400 py-2">Shift planner</li>
+              <li className="text-sm text-gray-400 py-2">Recruiting</li>
+            </ul>
+            <ul className="w-[22%]">
+              <li className="font-bold">Information</li>
+              <li className="text-sm text-gray-400 py-2">FAQ</li>
+              <li className="text-sm text-gray-400 py-2">Blog</li>
+              <li className="text-sm text-gray-400 py-2">Support</li>
+            </ul>
+            <ul className="w-[22%]">
+              <li className="font-bold">Company</li>
+              <li className="text-sm text-gray-400 py-2">About us</li>
+              <li className="text-sm text-gray-400 py-2">Careers</li>
+              <li className="text-sm text-gray-400 py-2">Contact us</li>
+            </ul>
+            <div className="bg-[hsl(223.64deg_32.04%_20.2%)] p-12 w-[30%]">
+              <h2 className="font-bold mb-4">Subscribe</h2>
+
+              <div className="flex">
+                <input
+                  type="text"
+                  className="bg-white rounded-s h-12 ps-4"
+                  placeholder="Email Address"
+                />
+                <button className="bg-[#015AFF] rounded-e p-4 h-12 flex justify-center items-center">
+                  <FaArrowRightLong />
+                </button>
+              </div>
+
+              <div className="mt-5 text-gray-400">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud"
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2 ps-7 py-3 text-white font-bold text-sm md:text-2xl">
+              <Image
+                src={AICV2}
+                height={20}
+                width={20}
+                alt=""
+                className="h-8 w-8 md:h-14 md:w-14"
+              />
+
+              <span className="">AI CV</span>
+            </div>
+
+            <div className="flex gap-4">
+              <span className="">Terms</span>
+              <span className="">Privacy</span>
+              <span className="">Cookies</span>
+            </div>
+
+            <div className="flex gap-4">
+              <span className="border border-gray-500 p-2 rounded-full">
+                <FaLinkedinIn />
+              </span>
+              <span className="border border-gray-500 p-2 rounded-full">
+                <FaFacebookF />
+              </span>
+              <span className="border border-gray-500 p-2 rounded-full">
+                <FaTwitter />
               </span>
             </div>
           </div>

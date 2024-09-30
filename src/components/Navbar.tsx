@@ -25,11 +25,9 @@ export const Navbar = () => {
           {`${profileData?.first_name ?? ""} ${profileData?.last_name ?? ""}`}
         </span>
 
-        <Link
-                href={"/buy-credits"}
-                className="text-xs text-[#005DFF]"
-              >Credits left : 300
-                </Link>
+        <Link href={"/buy-credits"} className="text-xs text-[#005DFF]">
+          Credits left : 300
+        </Link>
         {/* <span className="text-xs text-[#005DFF]">Credits left : 300</span> */}
       </div>
 

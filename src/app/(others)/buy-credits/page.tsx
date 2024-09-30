@@ -1,16 +1,11 @@
-'use client'
-
+"use client";
 
 import { Switch } from "@/components/ui/switch";
 import Link from "next/link";
-import { useRouter } from 'next/navigation'
-
-
+import { useRouter } from "next/navigation";
 
 const BuyCredits = () => {
-  const router = useRouter()
-
-
+  const router = useRouter();
 
   return (
     <>
@@ -45,10 +40,12 @@ const BuyCredits = () => {
 
           <div className="font-bold text-4xl">$45</div>
 
-          <button onClick={() => router.push('/payment-methods')} className="bg-[linear-gradient(93deg,_#0075FF_0%,_#0135FF_100%)] text-white px-10 py-4 rounded-lg mt-8 w-[50%]">
+          <button
+            onClick={() => router.push("/payment-methods")}
+            className="bg-[linear-gradient(93deg,_#0075FF_0%,_#0135FF_100%)] text-white px-10 py-4 rounded-lg mt-8 w-[50%]"
+          >
             Buy now
           </button>
-          
         </div>
       </div>
     </>

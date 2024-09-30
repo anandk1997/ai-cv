@@ -21,7 +21,7 @@ const SearchCVHistoryDetails = () => {
     queryFn: () => searchCvHistoryDetails(id?.toString()),
   });
 
-  const { isPending ,isPending1, mutate1 } = useCvList();
+  const { isPending, isPending1, mutate1 } = useCvList();
 
   useMutationError(isError2, error2);
 

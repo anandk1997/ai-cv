@@ -12,7 +12,7 @@ const CvList = ({
   data,
   isShortlisting,
   onShortlist,
-  loading
+  loading,
 }: {
   data: ICandidateProfile[];
   isShortlisting: boolean;

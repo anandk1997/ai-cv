@@ -35,11 +35,12 @@ export const useCvList = () => {
     if (isSuccess) toast.success("Cv Shortlisted");
   }, [isSuccess]);
 
-  useEffect(()=>{
+  useEffect(() => {
     mutate({
-      search_query: "An entry-level professional with 1 year and 7 months of experience in hairdressing and customer service, with voluntary work experience. The candidate brings core skills in Hairdressing, Customer Service, and Voluntary Work Experience. Non-technical skills include Excellent Communication, Trustworthiness, Punctuality, Teamwork, Problem Solving, Using Initiative, Working Under Pressure, Enthusiasm, and Hard-Working. The candidate holds an NVQ Level 1 in Hair and Beauty Studies, City & Guilds certification, Level 2 in Performing Arts, and GCSE. This role is ideal for a dedicated individual eager to contribute to a dynamic team environment and committed to delivering high-quality service and support.",
+      search_query:
+        "An entry-level professional with 1 year and 7 months of experience in hairdressing and customer service, with voluntary work experience. The candidate brings core skills in Hairdressing, Customer Service, and Voluntary Work Experience. Non-technical skills include Excellent Communication, Trustworthiness, Punctuality, Teamwork, Problem Solving, Using Initiative, Working Under Pressure, Enthusiasm, and Hard-Working. The candidate holds an NVQ Level 1 in Hair and Beauty Studies, City & Guilds certification, Level 2 in Performing Arts, and GCSE. This role is ideal for a dedicated individual eager to contribute to a dynamic team environment and committed to delivering high-quality service and support.",
     });
-  }, [])
+  }, []);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
