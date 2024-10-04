@@ -1,11 +1,14 @@
 "use client";
 
 import { useGetSession } from "@/hooks/useGetToken";
+import { useMutationError } from "@/hooks/useMutationError";
+import { useToastLoading } from "@/hooks/useToastLoading";
 import { useWebSocket } from "@/hooks/useWebSocket";
-import { getNotifications } from "@/lib/api";
+import { getNotifications, markRead } from "@/lib/api";
 import { env } from "@/lib/env/intex";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
+import toast from "react-hot-toast";
 import { GoStack } from "react-icons/go";
 
 const Notifications = () => {
@@ -23,9 +26,20 @@ const Notifications = () => {
 
   const { messages, setMessages } = useWebSocket(wsUrl);
 
-  useEffect(() => {
-    console.info(notifications);
+  const { mutate, isPending, isSuccess, isError, error } = useMutation({
+    mutationFn: markRead,
+  });
 
+  useToastLoading(isPending);
+  useMutationError(isError, error);
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Notification marked as read`");
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
     if (notifications) {
       const newNotifications = Array.isArray(notifications)
         ? notifications.filter((notification) => notification !== null)
@@ -33,8 +47,6 @@ const Notifications = () => {
 
       setMessages((prev) => [...prev, ...newNotifications]);
     }
-
-    console.info(messages);
   }, [notifications, setMessages]);
 
   return (
@@ -70,7 +82,11 @@ const Notifications = () => {
             ?.slice()
             .reverse()
             .map((item: any) => (
-              <div className="mt-6" key={Math.random()}>
+              <div
+                className="mt-6 cursor-pointer"
+                key={Math.random()}
+                onClick={() => mutate(item?.id)}
+              >
                 <span className="text-gray-400 text-xs">Today</span>
 
                 <div className="flex justify-between items-center mt-5 w-full md:w-[70%]">
