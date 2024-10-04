@@ -45,7 +45,7 @@ const Shortlisted = () => {
     <>
       <h1 className="pb-7 text-2xl font-semibold">Shortlisted CV's</h1>
 
-      <div className="w-full rounded-md h-[calc(100%_-_80px)] overflow-auto p-6 whitespace-nowrap">
+      <div className="w-full rounded-md h-[calc(100%_-_80px)] overflow-auto p-6">
         {isLoading ? (
           <Loader />
         ) : !!!cvData?.length ? (
@@ -53,53 +53,58 @@ const Shortlisted = () => {
         ) : (
           cvData?.map((item: IShortlisted) => (
             <div
-              className="flex gap-4 align-middle items-center mb-3"
+              className="flex gap-4 align-middle items-center w-full mb-3"
               key={Math.random()}
             >
               {/* <Checkbox className="h-4 w-4 border-gray-400" /> */}
 
-              <div className="flex gap-4 align-middle items-center">
-                <div className="flex items-center gap-3 bg-white px-7 min-h-16 max-h-40 rounded-xl">
-                  <Image
-                    src="https://picsum.photos/id/237/200/300"
-                    height={10}
-                    width={10}
-                    alt=""
-                    className="h-10 w-10 rounded-xl"
-                  />
+              <div className="flex gap-4 align-middle items-center w-full">
+                <div className="flex items-center justify-between gap-3 bg-white px-7 min-h-16 w-full max-h-40 rounded-xl">
+                  <div className=" flex items-center gap-3">
+                    <Image
+                      src="https://picsum.photos/id/237/200/300"
+                      height={10}
+                      width={10}
+                      alt=""
+                      className="h-10 w-10 rounded-xl"
+                    />
 
-                  <div className="flex flex-col">
-                    <h2 className="font-semibold text-lg">John Doe</h2>
+                    <div className="flex flex-col">
+                      <h2 className="font-semibold text-lg">John Doe</h2>
 
-                    <span className="text-gray-400 text-[11px]">
-                      {item?.shortlisted_data?.email}
+                      <span className="text-gray-400 text-[11px]">
+                        {item?.shortlisted_data?.email}
+                      </span>
+                    </div>
+
+                    <span className="text-gray-400">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Facere, dolor inventore. Ea quas eligendi architecto minus
+                      ad laudantium modi culpa.
                     </span>
                   </div>
 
-                  <span className="text-gray-400">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Laboriosam deleniti laborum quis consequuntur ut
-                  </span>
-
-                  <div className="flex flex-col">
-                    <div className="flex gap-2 items-center">
-                      <span className="h-3 w-5 rounded-full bg-blue-500" />
-                      <span className="font-semibold">Skills</span>
+                  <div className=" flex items-center gap-3">
+                    <div className="flex flex-col">
+                      <div className="flex gap-2 items-center">
+                        <span className="h-3 w-5 rounded-full bg-blue-500" />
+                        <span className="font-semibold">Skills</span>
+                      </div>
                     </div>
+
+                    <button className="flex justify-center items-center gap-2 rounded-xl font-light bg-[linear-gradient(100deg,_#0075FF_0%,_#0135FF_100%)] text-white h-12 w-56 text-sm">
+                      <GoDownload />
+                      <span>Download for credits</span>
+                    </button>
+
+                    <button
+                      className="border-y-[5px] border-x-[4px] border-[#005dff] h-[11px] w-[13px] bg-white rounded-[3px]"
+                      disabled={isPending}
+                      onClick={() => {
+                        mutate(item?.id);
+                      }}
+                    />
                   </div>
-
-                  <button className="flex justify-center items-center gap-2 rounded-xl font-light bg-[linear-gradient(100deg,_#0075FF_0%,_#0135FF_100%)] text-white h-12 w-56 text-sm">
-                    <GoDownload />
-                    <span>Download for credits</span>
-                  </button>
-
-                  <button
-                    className="border-y-[5px] border-x-[4px] border-[#005dff] h-[11px] w-[13px] bg-white rounded-[3px]"
-                    disabled={isPending}
-                    onClick={() => {
-                      mutate(item?.id);
-                    }}
-                  />
                 </div>
               </div>
             </div>
