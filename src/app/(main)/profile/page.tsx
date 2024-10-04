@@ -91,8 +91,6 @@ const Profile = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (!isEdit1) return setIsEdit1();
-
     const formData = new FormData(e.target);
 
     const first_name = formData.get("first_name");
@@ -169,12 +167,12 @@ const Profile = () => {
               </button>
             </div>
 
-            <Link
+            {/* <Link
               href=""
               className="bg-[linear-gradient(97deg,_#0075FF_0%,_#0135FF_100%)] flex justify-center items-center px-6 h-12 rounded-lg text-white text-sm"
             >
               Change Password
-            </Link>
+            </Link> */}
           </section>
 
           <form onSubmit={handleSubmit}>
@@ -183,7 +181,7 @@ const Profile = () => {
                 <h1 className="font-semibold">Personal Information</h1>
 
                 <div className="flex gap-2">
-                  {isEdit1 && (
+                  {isEdit1 ? (
                     <button
                       className="text-gray-600 text-sm border border-gray-300 rounded-sm px-3 h-8 flex justify-center items-center gap-2"
                       onClick={setIsEdit1}
@@ -191,27 +189,28 @@ const Profile = () => {
                     >
                       Cancel
                     </button>
-                  )}
-
-                  <button
-                    className="text-gray-600 text-sm border border-gray-300 rounded-sm px-3 h-8 flex justify-center items-center gap-2"
-                    type="submit"
-                    disabled={isUpdating}
-                  >
-                    {isEdit1 ? (
-                      isUpdating ? (
-                        "Updating"
+                  ) : (
+                    <button
+                      className="text-gray-600 text-sm border border-gray-300 rounded-sm px-3 h-8 flex justify-center items-center gap-2"
+                      type="button"
+                      onClick={setIsEdit1}
+                      disabled={isUpdating}
+                    >
+                      {isEdit1 ? (
+                        isUpdating ? (
+                          "Updating"
+                        ) : (
+                          "Save"
+                        )
                       ) : (
-                        "Save"
-                      )
-                    ) : (
-                      <>
-                        <PiPencilSimpleLineThin />
+                        <>
+                          <PiPencilSimpleLineThin />
 
-                        <span>Edit</span>
-                      </>
-                    )}
-                  </button>
+                          <span>Edit</span>
+                        </>
+                      )}
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -225,7 +224,7 @@ const Profile = () => {
                     disabled={!isEdit1}
                     name="first_name"
                     defaultValue={profileData?.first_name ?? ""}
-                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                    className="h-12 bg-[#F5F5F5] rounded-md w-full px-4"
                   />
                 </div>
 
@@ -238,7 +237,7 @@ const Profile = () => {
                     disabled={!isEdit1}
                     name="last_name"
                     defaultValue={profileData?.last_name ?? ""}
-                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                    className="h-12 bg-[#F5F5F5] rounded-md w-full px-4"
                   />
                 </div>
               </div>
@@ -253,7 +252,7 @@ const Profile = () => {
                     disabled={!isEdit1}
                     name="gender"
                     defaultValue={profileData?.gender ?? ""}
-                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                    className="h-12 bg-[#F5F5F5] rounded-md w-full px-4"
                   >
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -268,7 +267,7 @@ const Profile = () => {
                   <input
                     type="date"
                     disabled={!isEdit1}
-                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                    className="h-12 bg-[#F5F5F5] rounded-md w-full px-4"
                   />
                 </div>
               </div>
@@ -288,7 +287,7 @@ const Profile = () => {
                   <input
                     type="number"
                     disabled={!isEdit1}
-                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                    className="h-12 bg-[#F5F5F5] rounded-md w-full px-4"
                   />
                 </div>
 
@@ -301,7 +300,7 @@ const Profile = () => {
                     disabled={!isEdit1}
                     name="email"
                     defaultValue={profileData?.email ?? ""}
-                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                    className="h-12 bg-[#F5F5F5] rounded-md w-full px-4"
                   />
                 </div>
               </div>
@@ -321,48 +320,23 @@ const Profile = () => {
                   <select
                     name="language"
                     disabled={!isEdit1}
-                    className="h-12 border border-gray-400 rounded-md w-full md:w-[49%] px-4"
+                    className="h-12 bg-[#F5F5F5] rounded-md w-full md:w-[49%] px-4"
                   >
                     <option value="male">English</option>
                     <option value="female">Hindi</option>
                   </select>
                 </div>
               </div>
+
+              <button
+                className="bg-[linear-gradient(180deg,_#0075FF_0%,_#0135FF_100%)] flex justify-center gap-2 items-center px-20 h-12 rounded-md text-white text-sm mt-14"
+                type="submit"
+                disabled={isUpdating || !isEdit1}
+              >
+                <span>{isUpdating ? "Processing" : "Save"}</span>
+              </button>
             </section>
           </form>
-
-          <AlertDialog>
-            <AlertDialogTrigger
-              className="bg-[#FF342D] flex justify-center gap-2 items-center px-6 h-12 rounded-md text-white text-sm mt-14"
-              disabled={isPending}
-            >
-              <span>{isPending ? "Processing" : "Delete Account"}</span>
-              <SlArrowRight />
-            </AlertDialogTrigger>
-
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-
-                <AlertDialogAction
-                  className="bg-red-600 hover:bg-red-500"
-                  onClick={() => del(session?.user?.id)}
-                  disabled={isPending}
-                >
-                  Continue
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
         </>
       )}
     </div>
