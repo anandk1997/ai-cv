@@ -9,8 +9,6 @@ const SearchCV = () => {
 
   return (
     <>
-      <h1 className="pb-7 text-2xl font-semibold">CV's Based on Search</h1>
-
       <form onSubmit={handleSubmit}>
         <div className="flex gap-2 my-5">
           <textarea
@@ -30,7 +28,9 @@ const SearchCV = () => {
         </div>
       </form>
 
-      <div className="flex flex-wrap justify-center gap-4 h-[calc(100%_-_244px)] overflow-auto">
+      <h1 className="pb-7 text-2xl font-semibold">CV's Based on Search</h1>
+
+      <div className="flex flex-wrap gap-4 h-[calc(100%_-_244px)] overflow-auto">
         <CvList
           data={data}
           isShortlisting={isPending1}
