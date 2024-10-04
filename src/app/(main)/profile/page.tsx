@@ -22,6 +22,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useToastLoading } from "@/hooks/useToastLoading";
+import { useMutationError } from "@/hooks/useMutationError";
+import { Loader } from "@/components/Loader";
 
 const Profile = () => {
   const [isEdit1, setIsEdit1] = useReducer((prev) => !prev, false);
@@ -30,7 +33,7 @@ const Profile = () => {
 
   const { data: session } = useGetSession();
 
-  const { data: profileData } = useQuery({
+  const { data: profileData, isPending: isProfileLoading } = useQuery({
     queryKey: ["profile", session?.user?.id],
     queryFn: () => getProfile(session?.user?.id),
   });
@@ -39,6 +42,8 @@ const Profile = () => {
     mutate: del,
     isPending,
     isSuccess,
+    isError,
+    error,
   } = useMutation({
     mutationFn: deleteProfile,
   });
@@ -47,6 +52,8 @@ const Profile = () => {
     mutate: update,
     isPending: isUpdating,
     isSuccess: isUpdated,
+    isError: isUpdateError,
+    error: updateError,
   } = useMutation({
     mutationFn: updateProfile,
   });
@@ -55,6 +62,8 @@ const Profile = () => {
     mutate: upload,
     isPending: isUploading,
     isSuccess: isUploaded,
+    isError: isUploadError,
+    error: uploadError,
   } = useMutation({
     mutationFn: updateProfile,
   });
@@ -97,6 +106,14 @@ const Profile = () => {
     update({ id: session?.user?.id, formData });
   };
 
+  useToastLoading(isUpdating);
+  useToastLoading(isPending);
+  useToastLoading(isUploading);
+
+  useMutationError(isError, error);
+  useMutationError(isUpdateError, updateError);
+  useMutationError(isUploadError, uploadError);
+
   useEffect(() => {
     if (isUpdated) {
       queryClient.refetchQueries({ queryKey: ["profile"] });
@@ -114,233 +131,240 @@ const Profile = () => {
 
   return (
     <div className="bg-white h-full overflow-auto mt-4 p-12 rounded-3xl">
-      <h1 className="font-semibold">Photo Profile</h1>
+      {isProfileLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <h1 className="font-semibold">Photo Profile</h1>
 
-      <section className="flex flex-col lg:flex-row justify-between mt-3 mb-5 gap-2">
-        <div className="flex flex-col lg:flex-row align-middle items-center gap-6">
-          <div className="flex gap-2 items-center">
-            <Image
-              src="https://picsum.photos/id/237/200/300"
-              height={10}
-              width={10}
-              alt=""
-              className="h-16 w-16 rounded-full"
-            />
+          <section className="flex flex-col lg:flex-row justify-between mt-3 mb-5 gap-2">
+            <div className="flex flex-col lg:flex-row align-middle items-center gap-6">
+              <div className="flex gap-2 items-center">
+                <Image
+                  src="https://picsum.photos/id/237/200/300"
+                  height={10}
+                  width={10}
+                  alt=""
+                  className="h-16 w-16 rounded-full"
+                />
 
-            <label
-              htmlFor="file"
-              className="cursor-pointer text-[#3B6BF6] font-semibold border border-[#3B6BF6] h-12 px-6 rounded-lg flex justify-center align-middle items-center"
-            >
-              <input
-                type="file"
-                className="hidden"
-                id="file"
-                name="profile_image"
-                disabled={isUploading}
-                onChange={handleUpload}
-              />
-              {isUploading ? "Uploading" : "Upload New Picture"}
-            </label>
-          </div>
-
-          <button className="bg-[#F8F8F8] h-12 px-6 font-semibold text-gray-700 rounded-lg w-full lg:w-24">
-            Delete
-          </button>
-        </div>
-
-        <Link
-          href=""
-          className="bg-[linear-gradient(97deg,_#0075FF_0%,_#0135FF_100%)] flex justify-center items-center px-6 h-12 rounded-lg text-white text-sm"
-        >
-          Change Password
-        </Link>
-      </section>
-
-      <form onSubmit={handleSubmit}>
-        <section className="mt-8">
-          <div className="flex justify-between">
-            <h1 className="font-semibold">Personal Information</h1>
-
-            <div className="flex gap-2">
-              {isEdit1 && (
-                <button
-                  className="text-gray-600 text-sm border border-gray-300 rounded-sm px-3 h-8 flex justify-center items-center gap-2"
-                  onClick={setIsEdit1}
-                  type="button"
+                <label
+                  htmlFor="file"
+                  className="cursor-pointer text-[#3B6BF6] font-semibold border border-[#3B6BF6] h-12 px-6 rounded-lg flex justify-center align-middle items-center"
                 >
-                  Cancel
-                </button>
-              )}
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="file"
+                    name="profile_image"
+                    disabled={isUploading}
+                    onChange={handleUpload}
+                  />
+                  {isUploading ? "Uploading" : "Upload New Picture"}
+                </label>
+              </div>
 
-              <button
-                className="text-gray-600 text-sm border border-gray-300 rounded-sm px-3 h-8 flex justify-center items-center gap-2"
-                type="submit"
-              >
-                {isEdit1 ? (
-                  isUpdating ? (
-                    "Updating"
-                  ) : (
-                    "Save"
-                  )
-                ) : (
-                  <>
-                    <PiPencilSimpleLineThin />
-
-                    <span>Edit</span>
-                  </>
-                )}
+              <button className="bg-[#F8F8F8] h-12 px-6 font-semibold text-gray-700 rounded-lg w-full lg:w-24">
+                Delete
               </button>
             </div>
-          </div>
 
-          <div className="flex flex-col md:flex-row justify-between gap-3 mt-3">
-            <div className="flex flex-col flex-1 gap-1">
-              <label htmlFor="" className="text-gray-500 text-sm">
-                First Name
-              </label>
+            <Link
+              href=""
+              className="bg-[linear-gradient(97deg,_#0075FF_0%,_#0135FF_100%)] flex justify-center items-center px-6 h-12 rounded-lg text-white text-sm"
+            >
+              Change Password
+            </Link>
+          </section>
 
-              <input
-                disabled={!isEdit1}
-                name="first_name"
-                defaultValue={profileData?.first_name ?? ""}
-                className="h-12 border border-gray-400 rounded-md w-full px-4"
-              />
-            </div>
+          <form onSubmit={handleSubmit}>
+            <section className="mt-8">
+              <div className="flex justify-between">
+                <h1 className="font-semibold">Personal Information</h1>
 
-            <div className="flex flex-col flex-1 gap-1">
-              <label htmlFor="" className="text-gray-500 text-sm">
-                Last Name
-              </label>
+                <div className="flex gap-2">
+                  {isEdit1 && (
+                    <button
+                      className="text-gray-600 text-sm border border-gray-300 rounded-sm px-3 h-8 flex justify-center items-center gap-2"
+                      onClick={setIsEdit1}
+                      type="button"
+                    >
+                      Cancel
+                    </button>
+                  )}
 
-              <input
-                disabled={!isEdit1}
-                name="last_name"
-                defaultValue={profileData?.last_name ?? ""}
-                className="h-12 border border-gray-400 rounded-md w-full px-4"
-              />
-            </div>
-          </div>
+                  <button
+                    className="text-gray-600 text-sm border border-gray-300 rounded-sm px-3 h-8 flex justify-center items-center gap-2"
+                    type="submit"
+                    disabled={isUpdating}
+                  >
+                    {isEdit1 ? (
+                      isUpdating ? (
+                        "Updating"
+                      ) : (
+                        "Save"
+                      )
+                    ) : (
+                      <>
+                        <PiPencilSimpleLineThin />
 
-          <div className="flex flex-col md:flex-row justify-between gap-3 mt-3">
-            <div className="flex flex-col flex-1 gap-1">
-              <label htmlFor="" className="text-gray-500 text-sm">
-                Gender
-              </label>
+                        <span>Edit</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
 
-              <select
-                disabled={!isEdit1}
-                name="gender"
-                defaultValue={profileData?.gender ?? ""}
-                className="h-12 border border-gray-400 rounded-md w-full px-4"
-              >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div>
+              <div className="flex flex-col md:flex-row justify-between gap-3 mt-3">
+                <div className="flex flex-col flex-1 gap-1">
+                  <label htmlFor="" className="text-gray-500 text-sm">
+                    First Name
+                  </label>
 
-            <div className="flex flex-col flex-1 gap-1">
-              <label htmlFor="" className="text-gray-500 text-sm">
-                Date of birth
-              </label>
+                  <input
+                    disabled={!isEdit1}
+                    name="first_name"
+                    defaultValue={profileData?.first_name ?? ""}
+                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                  />
+                </div>
 
-              <input
-                type="date"
-                disabled={!isEdit1}
-                className="h-12 border border-gray-400 rounded-md w-full px-4"
-              />
-            </div>
-          </div>
-        </section>
+                <div className="flex flex-col flex-1 gap-1">
+                  <label htmlFor="" className="text-gray-500 text-sm">
+                    Last Name
+                  </label>
 
-        <section className="mt-8">
-          <div className="flex justify-between">
-            <h1 className="font-semibold">Contact Personal</h1>
-          </div>
+                  <input
+                    disabled={!isEdit1}
+                    name="last_name"
+                    defaultValue={profileData?.last_name ?? ""}
+                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                  />
+                </div>
+              </div>
 
-          <div className="flex flex-col md:flex-row justify-between gap-3 mt-3">
-            <div className="flex flex-col flex-1 gap-1">
-              <label htmlFor="" className="text-gray-500 text-sm">
-                Phone number
-              </label>
+              <div className="flex flex-col md:flex-row justify-between gap-3 mt-3">
+                <div className="flex flex-col flex-1 gap-1">
+                  <label htmlFor="" className="text-gray-500 text-sm">
+                    Gender
+                  </label>
 
-              <input
-                type="number"
-                disabled={!isEdit1}
-                className="h-12 border border-gray-400 rounded-md w-full px-4"
-              />
-            </div>
+                  <select
+                    disabled={!isEdit1}
+                    name="gender"
+                    defaultValue={profileData?.gender ?? ""}
+                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                  >
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
 
-            <div className="flex flex-col flex-1 gap-1">
-              <label htmlFor="" className="text-gray-500 text-sm">
-                Email
-              </label>
+                <div className="flex flex-col flex-1 gap-1">
+                  <label htmlFor="" className="text-gray-500 text-sm">
+                    Date of birth
+                  </label>
 
-              <input
-                disabled={!isEdit1}
-                name="email"
-                defaultValue={profileData?.email ?? ""}
-                className="h-12 border border-gray-400 rounded-md w-full px-4"
-              />
-            </div>
-          </div>
-        </section>
+                  <input
+                    type="date"
+                    disabled={!isEdit1}
+                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                  />
+                </div>
+              </div>
+            </section>
 
-        <section className="mt-8">
-          <div className="flex justify-between">
-            <h1 className="font-semibold">General</h1>
-          </div>
+            <section className="mt-8">
+              <div className="flex justify-between">
+                <h1 className="font-semibold">Contact Personal</h1>
+              </div>
 
-          <div className="flex justify-between gap-3 mt-3">
-            <div className="flex flex-col flex-1 gap-1">
-              <label htmlFor="" className="text-gray-500 text-sm">
-                Language
-              </label>
+              <div className="flex flex-col md:flex-row justify-between gap-3 mt-3">
+                <div className="flex flex-col flex-1 gap-1">
+                  <label htmlFor="" className="text-gray-500 text-sm">
+                    Phone number
+                  </label>
 
-              <select
-                name="language"
-                disabled={!isEdit1}
-                className="h-12 border border-gray-400 rounded-md w-full md:w-[49%] px-4"
-              >
-                <option value="male">English</option>
-                <option value="female">Hindi</option>
-              </select>
-            </div>
-          </div>
-        </section>
-      </form>
+                  <input
+                    type="number"
+                    disabled={!isEdit1}
+                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                  />
+                </div>
 
-      <AlertDialog>
-        <AlertDialogTrigger
-          className="bg-[#FF342D] flex justify-center gap-2 items-center px-6 h-12 rounded-md text-white text-sm mt-14"
-          disabled={isPending}
-        >
-          <span>{isPending ? "Processing" : "Delete Account"}</span>
-          <SlArrowRight />
-        </AlertDialogTrigger>
+                <div className="flex flex-col flex-1 gap-1">
+                  <label htmlFor="" className="text-gray-500 text-sm">
+                    Email
+                  </label>
 
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <input
+                    disabled={!isEdit1}
+                    name="email"
+                    defaultValue={profileData?.email ?? ""}
+                    className="h-12 border border-gray-400 rounded-md w-full px-4"
+                  />
+                </div>
+              </div>
+            </section>
 
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
+            <section className="mt-8">
+              <div className="flex justify-between">
+                <h1 className="font-semibold">General</h1>
+              </div>
 
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <div className="flex justify-between gap-3 mt-3">
+                <div className="flex flex-col flex-1 gap-1">
+                  <label htmlFor="" className="text-gray-500 text-sm">
+                    Language
+                  </label>
 
-            <AlertDialogAction
-              className="bg-red-600 hover:bg-red-500"
-              onClick={() => del(session?.user?.id)}
+                  <select
+                    name="language"
+                    disabled={!isEdit1}
+                    className="h-12 border border-gray-400 rounded-md w-full md:w-[49%] px-4"
+                  >
+                    <option value="male">English</option>
+                    <option value="female">Hindi</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+          </form>
+
+          <AlertDialog>
+            <AlertDialogTrigger
+              className="bg-[#FF342D] flex justify-center gap-2 items-center px-6 h-12 rounded-md text-white text-sm mt-14"
               disabled={isPending}
             >
-              Continue
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+              <span>{isPending ? "Processing" : "Delete Account"}</span>
+              <SlArrowRight />
+            </AlertDialogTrigger>
+
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete
+                  your account and remove your data from our servers.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+                <AlertDialogAction
+                  className="bg-red-600 hover:bg-red-500"
+                  onClick={() => del(session?.user?.id)}
+                  disabled={isPending}
+                >
+                  Continue
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </>
+      )}
     </div>
   );
 };

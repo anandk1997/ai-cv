@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { BsGrid } from "react-icons/bs";
 import { CiCircleInfo } from "react-icons/ci";
 import { GoGear, GoStack } from "react-icons/go";
@@ -14,7 +14,6 @@ import { uselogout } from "@/hooks/uselogout";
 
 export const Sidebar = () => {
   const path = usePathname();
-  const router = useRouter();
 
   const selected = (pathName: string) =>
     path.includes(pathName) && (

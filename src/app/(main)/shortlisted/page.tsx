@@ -1,6 +1,5 @@
 "use client";
 
-import { Checkbox } from "@/components/ui/auth/checkbox";
 import { getShortlistedCVs, unShortlistCV } from "@/lib/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
@@ -10,6 +9,7 @@ import { ICandidateProfile } from "../search-cv/page";
 import { useMutationError } from "@/hooks/useMutationError";
 import toast from "react-hot-toast";
 import { useToastLoading } from "@/hooks/useToastLoading";
+import { Loader } from "@/components/Loader";
 
 const Shortlisted = () => {
   const queryClient = useQueryClient();
@@ -47,7 +47,7 @@ const Shortlisted = () => {
 
       <div className="w-full rounded-md h-[calc(100%_-_80px)] overflow-auto p-6 whitespace-nowrap">
         {isLoading ? (
-          <h1>Loading...</h1>
+          <Loader />
         ) : !!!cvData?.length ? (
           <h1>No data found</h1>
         ) : (

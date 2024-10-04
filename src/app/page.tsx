@@ -4,7 +4,6 @@ import Image from "next/image";
 import AICV from "@/images/ai-cv-dash.png";
 import AICV2 from "@/images/ai-cv2.png";
 import SSIMG from "@/images/image.png";
-import DEMO from "@/images/demo.png";
 import Link from "next/link";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -40,7 +39,7 @@ export default function Home() {
             </Link>
           </nav>
 
-          <div className="mt-48 text-7xl text-center font-semibold">
+          <div className="mt-40 text-7xl text-center font-semibold">
             <span className="">
               Made for <span className="text-[#015AFF]">creative</span>. Built
               for
@@ -48,12 +47,12 @@ export default function Home() {
             <div className="">enterprise</div>
           </div>
 
-          <div className="text-gray-700 text-center mt-4">
+          <div className="text-gray-800 text-lg text-center mt-5">
             Give your team a secure, scalable collaboration platform to manage
             creative assets, centralize feedback, and deliver faster.
           </div>
 
-          <div className="flex w-full justify-center mt-7">
+          <div className="flex w-full justify-center mt-10">
             <input
               type="text"
               className="border-0 px-3 py-5 w-[80%] rounded-xl"
@@ -65,25 +64,23 @@ export default function Home() {
             Get Started
           </button>
 
-          <div className="flex flex-col justify-center items-center gap-2">
+          <div className="flex flex-col justify-center items-center gap-2 text-lg">
             <span className="text-5xl">Features</span>
-            <span>
+            <span className="text-[#000000]">
               AI Powered CV Matching Advanced Search Filters secure and Private
               Searches Instant results.
             </span>
 
-            <Image src={SSIMG} height={500}  alt="" className="mt-8" />
+            <Image src={SSIMG} height={500} alt="" className="mt-8" />
           </div>
-    
-         
 
           <button className="bg-[linear-gradient(102deg,_#0075FF_0%,_#0135FF_100%)] text-white text-xl px-12 py-4 rounded-2xl font-light flex mx-auto mt-7 mb-28">
             Search CV
           </button>
         </section>
 
-        <section className="bg-[#E9EFF3] px-36 py-16 overflow-auto">
-          <div className="mt-48 text-5xl text-center font-semibold">
+        <section className="bg-[#E9EFF3] px-36 py-10 overflow-auto">
+          <div className="mt-28 text-5xl text-center font-semibold">
             <span className="">
               How <span className="text-[#015AFF]">AI CV</span> Works in 4
               Simple Steps
@@ -172,8 +169,6 @@ export default function Home() {
                 cumque, officia ipsa tenetur.
               </span>
             </div>
-
-            
           </div>
 
           <button className="bg-[linear-gradient(102deg,_#0075FF_0%,_#0135FF_100%)] text-white text-xl px-16 py-5 rounded-2xl font-light flex mx-auto mt-7 mb-28">

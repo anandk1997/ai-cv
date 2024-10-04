@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkbox } from "@/components/ui/auth/checkbox";
+import { Loader } from "@/components/Loader";
 import { useMutationError } from "@/hooks/useMutationError";
 import { useToastLoading } from "@/hooks/useToastLoading";
 import { deleteSearchHistory, searchCvHistory } from "@/lib/api";
@@ -46,7 +46,7 @@ const SearchHistory = () => {
 
       <div className="w-full rounded-md h-[calc(100%_-_80px)] overflow-auto p-6">
         {isPending ? (
-          <h1>Loading...</h1>
+          <Loader />
         ) : !!!data?.length ? (
           <h1>No data found</h1>
         ) : (

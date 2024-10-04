@@ -5,7 +5,7 @@ import { useWebSocket } from "@/hooks/useWebSocket";
 import { getNotifications } from "@/lib/api";
 import { env } from "@/lib/env/intex";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { GoStack } from "react-icons/go";
 
 const Notifications = () => {
@@ -16,22 +16,26 @@ const Notifications = () => {
 
   const { data: session } = useGetSession();
 
-  const wsUrl = `${env.SOCKET_URL}/notifications/?token=${session?.access}`;
+  const wsUrl = useMemo(
+    () => `${env.SOCKET_URL}/notifications/?token=${session?.access}`,
+    [session],
+  );
 
   const { messages, setMessages } = useWebSocket(wsUrl);
 
   useEffect(() => {
-    console.log(notifications)
-   // setMessages((prev) => [...prev, notifications]);
-   setMessages((prev) => [
-    ...prev,
-    ...(Array.isArray(notifications) 
-      ? notifications.filter(notification => notification !== null) 
-      : notifications ? [notifications] : []
-    )
-  ]);
-    console.log(messages)
-  }, [notifications]);
+    console.info(notifications);
+
+    if (notifications) {
+      const newNotifications = Array.isArray(notifications)
+        ? notifications.filter((notification) => notification !== null)
+        : [notifications];
+
+      setMessages((prev) => [...prev, ...newNotifications]);
+    }
+
+    console.info(messages);
+  }, [notifications, setMessages]);
 
   return (
     <>
@@ -62,31 +66,34 @@ const Notifications = () => {
         </div>
 
         <div className="mt-4">
-          {messages?.slice().reverse().map((item: any) => (
-            <div className="mt-6" key={Math.random()}>
-              <span className="text-gray-400 text-xs">Today</span>
+          {messages
+            ?.slice()
+            .reverse()
+            .map((item: any) => (
+              <div className="mt-6" key={Math.random()}>
+                <span className="text-gray-400 text-xs">Today</span>
 
-              <div className="flex justify-between items-center mt-5 w-full md:w-[70%]">
-                <div className="flex items-center gap-4">
-                  <span className="text-[#005dff] bg-[#c2d9ff] rounded-full h-10 w-10 flex justify-center items-center">
-                    <GoStack size={17} />
-                  </span>
-
-                  <div className="flex flex-col gap-1">
-                    <span className="">{item?.user?.email}</span>
-
-                    <span className="text-gray-400 text-xs">
-                      {item?.message}
+                <div className="flex justify-between items-center mt-5 w-full md:w-[70%]">
+                  <div className="flex items-center gap-4">
+                    <span className="text-[#005dff] bg-[#c2d9ff] rounded-full h-10 w-10 flex justify-center items-center">
+                      <GoStack size={17} />
                     </span>
-                  </div>
-                </div>
 
-                <span className="text-gray-400 text-sm">
-                  {item?.created_at}
-                </span>
+                    <div className="flex flex-col gap-1">
+                      <span className="">{item?.user?.email}</span>
+
+                      <span className="text-gray-400 text-xs">
+                        {item?.message}
+                      </span>
+                    </div>
+                  </div>
+
+                  <span className="text-gray-400 text-sm">
+                    {item?.created_at}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </>
