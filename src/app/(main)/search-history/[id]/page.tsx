@@ -7,12 +7,13 @@ import { useMutationError } from "@/hooks/useMutationError";
 import { searchCvHistoryDetails } from "@/lib/api/cv";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { IoIosSearch } from "react-icons/io";
 import { IoListCircleOutline } from "react-icons/io5";
 
 const SearchCVHistoryDetails = () => {
+  const router = useRouter();
   const { id } = useParams();
 
   const {
@@ -57,6 +58,7 @@ const SearchCVHistoryDetails = () => {
         ) : (
           <CvList
             data={data2?.result}
+            onCvDetails={(i: number) => router.push(`${id}/${i}`)}
             isShortlisting={isPending1}
             onShortlist={mutate1}
             loading={isPending}

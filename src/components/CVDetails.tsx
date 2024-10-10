@@ -5,7 +5,11 @@ import { IoMdMail } from "react-icons/io";
 import { PiDownloadSimpleLight } from "react-icons/pi";
 import { TbChecklist } from "react-icons/tb";
 
-export const CvDetails = ({ data }: ICvDetails) => {
+export const CvDetails = ({
+  data,
+  onShortlist,
+  isShortlisting,
+}: ICvDetails) => {
   return (
     <div className="h-[calc(100%_-_9px)] overflow-auto ">
       <div className="flex gap-2 my-5">
@@ -106,7 +110,11 @@ export const CvDetails = ({ data }: ICvDetails) => {
       </div>
 
       <div className="flex gap-2 text-sm mt-5">
-        <button className="flex gap-1 items-center justify-center bg-[linear-gradient(104deg,_#0075FF_0%,_#0135FF_100%)] rounded-2xl py-2 text-white px-3 w-40">
+        <button
+          className="flex gap-1 items-center justify-center bg-[linear-gradient(104deg,_#0075FF_0%,_#0135FF_100%)] rounded-2xl py-2 text-white px-3 w-40"
+          disabled={isShortlisting}
+          onClick={onShortlist}
+        >
           <TbChecklist />
           Shortlisted
         </button>
@@ -121,17 +129,17 @@ export const CvDetails = ({ data }: ICvDetails) => {
   );
 };
 
-interface Education {
+interface IEducation {
   degree: string;
   major: string;
 }
 
-interface Resume {
+export interface IResume {
   certifications: string;
   city: string;
   core_skills: string[];
   country: string;
-  education: Education[];
+  education: IEducation[];
   email: string;
   industry: string[];
   languages: string;
@@ -144,5 +152,7 @@ interface Resume {
 }
 
 interface ICvDetails {
-  data: Resume;
+  data: IResume;
+  onShortlist: () => void;
+  isShortlisting: boolean;
 }

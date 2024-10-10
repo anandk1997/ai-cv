@@ -1,7 +1,8 @@
 "use client";
 
-import { CvDetails } from "@/components/CVDetails";
+import { CvDetails, IResume } from "@/components/CVDetails";
 import { Loader } from "@/components/Loader";
+import { useCvList } from "@/hooks/useCvList";
 import { useMutationError } from "@/hooks/useMutationError";
 import { searchCvHistoryDetails } from "@/lib/api/cv";
 import { useQuery } from "@tanstack/react-query";
@@ -12,7 +13,9 @@ const CvInfo = () => {
   const { cvid } = useParams();
   const { id } = useParams();
 
-  const [cvData, setCvData] = useState(null);
+  const [cvData, setCvData] = useState<IResume>();
+
+  const { mutate1, isPending, isPending1 } = useCvList();
 
   const {
     data: data2,
@@ -30,11 +33,26 @@ const CvInfo = () => {
   useEffect(() => {
     if (!isSuccess) return;
 
-    const data = data2?.result?.find((_: any, i: number) => i === Number(cvid));
+    const data = data2?.result?.find(
+      (_: IResume, i: number) => i === Number(cvid),
+    );
     setCvData(data);
   }, [isSuccess]);
 
-  return isPending2 ? <Loader /> : <CvDetails data={cvData!} />;
+  return isPending2 ? (
+    <Loader />
+  ) : (
+    <CvDetails
+      data={cvData!}
+      onShortlist={() =>
+        mutate1({
+          candiate_email: cvData?.email!,
+          shortlisted_data: cvData,
+        })
+      }
+      isShortlisting={isPending || isPending1}
+    />
+  );
 };
 
 export default CvInfo;

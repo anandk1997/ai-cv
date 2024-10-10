@@ -8,20 +8,26 @@ import toast from "react-hot-toast";
 export const useCvList = () => {
   const {
     mutate,
+
     isPending,
+    isSuccess,
+
     data,
-    isError: isError1,
-    error: error1,
+
+    isError,
+    error,
   } = useMutation({
     mutationFn: searchCV,
   });
 
   const {
     mutate: mutate1,
+
     isPending: isPending1,
-    isSuccess,
-    isError,
-    error,
+    isSuccess: isSuccess1,
+
+    isError: isError1,
+    error: error1,
   } = useMutation({
     mutationFn: shortlistCV,
   });
@@ -32,8 +38,8 @@ export const useCvList = () => {
   useMutationError(isError1, error1);
 
   useEffect(() => {
-    if (isSuccess) toast.success("Cv Shortlisted");
-  }, [isSuccess]);
+    if (isSuccess1) toast.success("Cv Shortlisted");
+  }, [isSuccess1]);
 
   useEffect(() => {
     mutate({
@@ -57,6 +63,7 @@ export const useCvList = () => {
     handleSubmit,
     isPending,
     isPending1,
+    isSuccess,
     data,
     mutate1,
   };

@@ -5,22 +5,20 @@ import { IoMdMail } from "react-icons/io";
 import { PiDownloadSimpleLight } from "react-icons/pi";
 import { TbChecklist } from "react-icons/tb";
 import { Loader } from "./Loader";
-import { useParams, useRouter } from "next/navigation";
 
 const CvList = ({
   data,
+  onCvDetails,
   isShortlisting,
   onShortlist,
   loading,
 }: {
   data: ICandidateProfile[];
+  onCvDetails: (i: number) => void;
   isShortlisting: boolean;
   onShortlist: any;
   loading: boolean;
 }) => {
-  const router = useRouter();
-  const { id } = useParams();
-
   return (
     <>
       {loading ? (
@@ -31,7 +29,7 @@ const CvList = ({
         data?.map((item: ICandidateProfile, i: number) => (
           <div
             className="bg-white rounded-3xl w-72 h-[465px] pt-5 px-2 pb-2 cursor-pointer flex flex-col justify-between"
-            onClick={() => router.push(`${id}/${i}`)}
+            onClick={() => onCvDetails(i)}
             key={Math.random()}
           >
             <div className="ps-3">

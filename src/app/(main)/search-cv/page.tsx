@@ -2,9 +2,12 @@
 
 import CvList from "@/components/CvList";
 import { useCvList } from "@/hooks/useCvList";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const SearchCV = () => {
+  const router = useRouter();
+
   const { handleSubmit, isPending, isPending1, data, mutate1 } = useCvList();
 
   return (
@@ -33,6 +36,7 @@ const SearchCV = () => {
       <div className="flex flex-wrap gap-4 h-[calc(100%_-_244px)] overflow-auto">
         <CvList
           data={data}
+          onCvDetails={(i: number) => router.push(`search-cv/${i}`)}
           isShortlisting={isPending1}
           onShortlist={mutate1}
           loading={isPending}
